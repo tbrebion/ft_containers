@@ -6,12 +6,12 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 17:08:41 by tbrebion          #+#    #+#             */
-/*   Updated: 2022/11/18 17:35:48 by tbrebion         ###   ########.fr       */
+/*   Updated: 2022/11/21 15:16:40 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ITERATOR_TRAITS
-#define ITERATOR_TRAITS
+#ifndef ITERATOR_TRAITS_HPP
+#define ITERATOR_TRAITS_HPP
 
 #include <iterator>
 
