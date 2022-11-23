@@ -1,5 +1,10 @@
 {
 	"files.associations": {
-		"type_traits": "cpp"
+		"type_traits": "cpp",
+		"array": "cpp",
+		"deque": "cpp",
+		"string": "cpp",
+		"vector": "cpp",
+		"string_view": "cpp"
 	}
 }
