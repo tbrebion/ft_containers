@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 11:54:23 by tbrebion          #+#    #+#             */
-/*   Updated: 2022/11/21 15:11:02 by tbrebion         ###   ########.fr       */
+/*   Updated: 2022/11/23 12:11:19 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 
 namespace ft{
 	
-	template< class T, class Allocator = std::allocator<T> >
+	template<typename T, typename Allocator = std::allocator<T>>
 	class vector{
 
 		public:
@@ -37,8 +37,6 @@ namespace ft{
 			typedef typename allocator_type::const_reference const_reference;
 			typedef typename allocator_type::pointer pointer;
 			typedef typename allocator_type::const_pointer const_pointer;
-			typedef wrap_iter<pointer> iterator;
-			typedef wrap_iter<const_pointer> const_iterator;
 			
 	};	
 }
