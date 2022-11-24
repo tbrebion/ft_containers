@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 11:54:23 by tbrebion          #+#    #+#             */
-/*   Updated: 2022/11/24 15:46:43 by tbrebion         ###   ########.fr       */
+/*   Updated: 2022/11/24 17:58:59 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,12 @@ namespace ft{
 
 				this->V_start = vector_allocator.allocate(ft::distance(first, last));
 				pointer x = this->V_start;
+				for ( ; first != last; ++first, ++x){
+
+					vector_allocator.construct(x, *first);
+				}
+				this->V_finish = x;
+				this->V_end_of_storage = this->V_finish;
 			}
 			
 			vector	&operator=(const vector &x){
@@ -279,7 +285,7 @@ namespace ft{
 
 					for (pointer x = position.base() + 1, y = position.base(); x != this->V_finish; ++x, ++y){
 
-						*y = x;
+						*y = *x;
 					}
 				}
 				vector_allocator.destroy(--this->V_finish);
@@ -288,7 +294,44 @@ namespace ft{
 
 			iterator	erase(iterator first, iterator last){
 
+				pointer pos = fisrt.base();
+				for (pointer pos2 = last.base(); pos2 != this->V_finish; ++pos2, ++pos){
+
+					*pos = *pos2;
+				}
+				pointer ptr = pos;
+				while (pos != this->V_finish){
 				
+					vector_allocator.destroy(ptr++);
+				}
+				this->V_finish = this->V_finish - (ptr - pos);
+				return (first);
+			}
+
+			void	assign(size_type n, const value_type &val){
+
+				clear();
+				if (n > capacity()){
+
+					pointer x = vector_allocator.allocate(n);
+					pointer y = x;
+					vector_allocator.deallocate(this->V_start, this->V_end_of_storage - this->V_start);
+					while (n--){
+
+						vector_allocator.construct(y++, val);
+					}
+					this->V_start = x;
+					this->V_finish = y;
+					this->V_end_of_storage = this->V_finish;
+				}
+				else{
+				
+					for (size_type i = 0; i != n; ++i){
+
+						vector_allocator.construct(this->V_start + i, val);
+					}
+					this->V_finish += n;
+				}
 			}
 	};
 }
