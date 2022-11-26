@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 11:54:23 by tbrebion          #+#    #+#             */
-/*   Updated: 2022/11/24 17:58:59 by tbrebion         ###   ########.fr       */
+/*   Updated: 2022/11/26 13:25:14 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -325,7 +325,7 @@ namespace ft{
 					this->V_end_of_storage = this->V_finish;
 				}
 				else{
-				
+
 					for (size_type i = 0; i != n; ++i){
 
 						vector_allocator.construct(this->V_start + i, val);
@@ -333,6 +333,62 @@ namespace ft{
 					this->V_finish += n;
 				}
 			}
+
+			template<typename InputIterator>
+			void	
+			assign(InputIterator fisrt, typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type last){
+				
+				clear();
+				size_type n = ft::distance(fisrt, last);
+				if (n > capacity()){
+
+					pointer tmp = vector_allocator.allocate(n);
+					vector_allocator.deallocate(this->V_start, this->V_end_of_storage - this->V_start);
+					for (size_type i = 0; first != last; ++fisrt, ++i){
+
+						vector_allocator.construct(tmp + i, *first);
+					}
+					this->V_start = tmp;
+					this->V_finish = tmp + n;
+					this->V_end_of_storage = this->V_finish;
+				}
+				else{
+
+					for (size_type i = 0; fisrt != last; ++fisrt, ++i){
+
+						vector_allocator.construct(this->V_start + i, *fisrt);
+					}
+					this->V_finish += n;
+				}
+			}
+
+			void	push_back(const value_type &x){
+
+				if (this->V_finish != this->V_end_of_storage){
+
+					vector_allocator.construct(this->V_finish++, x);
+				}
+				else{
+
+					insert(end(), x);
+				}
+			}
+
+			void	pop_back(){
+
+				vector_allocator.destroy(--this->V_finish);
+			}
+
+			void	clear(){
+
+				for (pointer x = this->V_start; x != this->V_finish; ++x){
+
+					vector_allocator.destroy(x);
+				}
+				this->V_finish = this->V_start;
+			}
+
+			
 	};
 }
 
