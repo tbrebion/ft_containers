@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 11:54:23 by tbrebion          #+#    #+#             */
-/*   Updated: 2022/11/26 13:25:14 by tbrebion         ###   ########.fr       */
+/*   Updated: 2022/11/26 13:54:41 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 #include "utils/normal_iterator.hpp"
 #include "utils/pair.hpp"
 #include "utils/reverse_iterator.hpp"
+#include "utils/utils.hpp"
 
 namespace ft{
 	
