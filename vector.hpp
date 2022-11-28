@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 11:54:23 by tbrebion          #+#    #+#             */
-/*   Updated: 2022/11/26 13:54:41 by tbrebion         ###   ########.fr       */
+/*   Updated: 2022/11/28 15:53:55 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -389,7 +389,65 @@ namespace ft{
 				this->V_finish = this->V_start;
 			}
 
-			
+			iterator	insert(iterator position, const value_type &x){
+
+				size_type n = position - begin();
+				if (this->V_finish != this->V_end_of_storage && position == end()){
+
+					vector_allocator.construct(this->V_finish, x);
+					++this->V_finish;
+				}
+				else{
+
+					size_type len = size() ? 2 * size() : ft::init_page_size<size_type>();
+					pointer tmp = vector_allocator.allocate(len);
+					pointer y = tmp;
+					for (iterator it = begin(); it != position; ++it, ++y){
+						
+						vector_allocator.construct(y, *it);
+					}
+					vector_allocator.construct(y++, x);
+					for ( ; position != end(); ++position, ++y){
+
+						vector_allocator.construct(y, *position);
+					}
+					clear();
+					vector_allocator.deallocate(this->V_start, this->V_end_of_storage - this->V_start);
+					this->V_start = tmp;
+					this->V_finish = y;
+					this->V_end_of_storage = this->V_start + len;
+				}
+				return (begin() + n);
+			}
+
+			void	insert(iterator position, size_type n, const value_type &x){
+
+				if (n == 0){
+
+					return;
+				}
+				if ((this->V_end_of_storage - this->V_finish) >= difference_type(n)){
+
+					if (difference_type(end() - position) < difference_type(n)){
+
+						
+					}
+				}
+			}
+			// 2 others insert 
+
+			allocator_type get_allocator()const{
+
+				return (this->vector_allocator);
+			}
+
+			void	swap(vector &x){
+
+				ft::swap(this->V_start, x.V_start);
+				ft::swap(this->V_finish, x.V_finish);
+				ft::swap(this->V_end_of_storage, x.V_end_of_storage);
+				ft::swap(this->vector_allocator, x.vector_allocator);
+			}
 	};
 }
 
