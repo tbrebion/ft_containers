@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 11:54:23 by tbrebion          #+#    #+#             */
-/*   Updated: 2022/11/28 15:53:55 by tbrebion         ###   ########.fr       */
+/*   Updated: 2022/11/29 18:11:29 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -430,11 +430,85 @@ namespace ft{
 
 					if (difference_type(end() - position) < difference_type(n)){
 
+						for (iterator it1 = position + n, iterator it2 = position; it2 != end(); ++it1, ++it2){
+
+							vector_allocator.construct(&*it1, *it2);
+						}
+						for (iterator it = position; it != end(); ++it){
+
+							*it = x;
+						}
+						for (pointer ptr = this->V_finish; ptr != this->V_finish + (n - (end() - position)); ++ptr){
+
+							vector_allocator.construct(ptr, x);
+						}
+						this->V_finish += n;
+					}
+					else{
+
+						difference_type diff = (end() - position) - n;
+						pointer ptr = this->V_finish;
+						for (iterator it = position + diff; it != end(); ++it, ++ptr){
 						
+							vector_allocator.construct(ptr, *it);
+						}
+						this->V_finish = ptr;
+						for (iterator it1 = end() - n, it2 = position + diff; it2 != position; ){
+
+							*(--it1) = *(--it2);
+						}
+						for (iterator it = position; it != position + n; ++it){
+
+							*it = x;
+						}
 					}
 				}
+				else{
+
+					size_type len = size() + n;
+					pointer y = vector_allocator.allocate(len);
+					pointer z = y;
+					for (iterator it = begin(); it != position; ++it, ++z){
+
+						vector_allocator.construct(z, *it);
+					}
+					while (n--){
+
+						vector_allocator.construct(z++, x);
+					}
+					for ( ; position != end(); ++position, ++z){
+
+						vector_allocator.construct(z, *position);
+					}
+					clear();
+					vector_allocator.deallocate(this->V_start, this->V_end_of_storage - this->V_start);
+					this->V_start = y;
+					this->V_finish = y + len;
+					this->V_end_of_storage = this->V_finish;
+				}
 			}
-			// 2 others insert 
+			
+			template<typename InputIterator>
+			void	insert(iterator position, InputIterator first, 
+			typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type last){
+
+				if (first == last){
+
+					return;
+				}
+				size_type n = ft::distance(first, last);
+				if (this->V_end_of_storage - this->V_finish >= differnce_type(n)){
+
+					if (difference_type(end() - position) < difference_type(n)){
+
+						for (iterator it1 = position + n, it2 = position)
+					}
+				}
+				else{
+
+					
+				}
+			}
 
 			allocator_type get_allocator()const{
 
