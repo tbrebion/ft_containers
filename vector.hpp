@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 11:54:23 by tbrebion          #+#    #+#             */
-/*   Updated: 2022/11/29 19:25:51 by tbrebion         ###   ########.fr       */
+/*   Updated: 2022/11/29 20:14:52 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -521,6 +521,8 @@ namespace ft{
 
 						difference_type diff = (end() - position) - n;
 						pointer ptr = this->V_finish;
+						
+						////// CONTINUE
 						
 					}
 				}
