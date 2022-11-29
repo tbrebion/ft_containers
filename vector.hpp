@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 11:54:23 by tbrebion          #+#    #+#             */
-/*   Updated: 2022/11/29 18:11:29 by tbrebion         ###   ########.fr       */
+/*   Updated: 2022/11/29 19:25:51 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -501,7 +501,27 @@ namespace ft{
 
 					if (difference_type(end() - position) < difference_type(n)){
 
-						for (iterator it1 = position + n, it2 = position)
+						for (iterator it1 = position + n, it2 = position; it2 != end(); ++it1, ++it2){
+
+							vector_allocator.construct(&*it1, *it2);
+						}
+						for ( ; position != end(); ++position, ++first){
+
+							*position = *first;
+						}
+						while (first != last){
+
+							vector_allocator.construct(&*position, *first);
+							first++;
+							position++;
+						}
+						this->V_finish += n;
+					}
+					else{
+
+						difference_type diff = (end() - position) - n;
+						pointer ptr = this->V_finish;
+						
 					}
 				}
 				else{
