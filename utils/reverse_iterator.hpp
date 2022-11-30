@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 15:14:36 by tbrebion          #+#    #+#             */
-/*   Updated: 2022/11/23 12:13:59 by tbrebion         ###   ########.fr       */
+/*   Updated: 2022/11/30 18:14:36 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ namespace ft{
 
 	template<typename Iter>
 	class reverse_iterator : public std::iterator <
-		typename iterator_traits<Iter>::iterartor_category,
+		typename iterator_traits<Iter>::iterator_category,
 		typename iterator_traits<Iter>::value_type,
 		typename iterator_traits<Iter>::difference_type,
 		typename iterator_traits<Iter>::pointer,

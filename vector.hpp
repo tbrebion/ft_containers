@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 11:54:23 by tbrebion          #+#    #+#             */
-/*   Updated: 2022/11/30 16:00:32 by tbrebion         ###   ########.fr       */
+/*   Updated: 2022/11/30 18:06:11 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -293,7 +293,7 @@ namespace ft{
 				return (position);
 			}
 
-			iterator	erase(iterator first, iterator last){
+			iterator	erase(iterator first, iterator last){ //   FIX
 
 				pointer pos = first.base();
 				for (pointer pos2 = last.base(); pos2 != this->V_finish; ++pos2, ++pos){
@@ -301,7 +301,7 @@ namespace ft{
 					*pos = *pos2;
 				}
 				pointer ptr = pos;
-				while (pos != this->V_finish){
+				while (ptr != this->V_finish){
 				
 					vector_allocator.destroy(ptr++);
 				}
@@ -497,7 +497,7 @@ namespace ft{
 					return;
 				}
 				size_type n = ft::distance(first, last);
-				if (this->V_end_of_storage - this->V_finish >= differnce_type(n)){
+				if (this->V_end_of_storage - this->V_finish >= difference_type(n)){
 
 					if (difference_type(end() - position) < difference_type(n)){
 
