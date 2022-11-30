@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 11:54:23 by tbrebion          #+#    #+#             */
-/*   Updated: 2022/11/29 20:14:52 by tbrebion         ###   ########.fr       */
+/*   Updated: 2022/11/30 14:28:30 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -521,14 +521,45 @@ namespace ft{
 
 						difference_type diff = (end() - position) - n;
 						pointer ptr = this->V_finish;
-						
-						////// CONTINUE
-						
+						for (iterator it = position + diff; it != end(); ++it, ++ptr){
+							
+							vector_allocator.construct(ptr, *it);
+						}
+						this->V_finish = ptr;
+						for (iterator it1 = end() - n, it2 = position + diff; it2 != position; ){
+
+							--(*it1) = --(*it2);
+						}
+						for (iterator it = position; fisrt != last; ++it, ++first){
+
+							*it = *first;
+						}
 					}
 				}
 				else{
 
-					
+					size_type len = size() + n;
+					pointer y = vector_allocator.allocate(len);
+					pointer z = y;
+					for (iterator it = begin(); it != position; ++it, ++z){
+
+						vector_allocator.construct(z, *it);
+					}
+					while (first != last){
+
+						vector_allocator.construct(z, *first);
+						first++;
+						z++;
+					}
+					for ( ; position != end(); ++position, ++z){
+
+						vector_allocator.construct(z, *position);
+					}
+					clear();
+					vector_allocator.deallocate(this->V_start, this->V_end_of_storage - this->V_start);
+					this->V_start = y;
+					this->V_finish = y + len;
+					this->V_end_of_storage = this->V_finish;
 				}
 			}
 
@@ -545,6 +576,48 @@ namespace ft{
 				ft::swap(this->vector_allocator, x.vector_allocator);
 			}
 	};
+	
+	template<typename T, typename Allocator>
+	inline bool	operator==(const vector<T, Allocator> &x, const vector<T, Allocator> &y){
+
+		return (x.size() == y.size() && equal(x.begin(), x.end(), y.begin()));
+	}
+	
+	template<typename T, typename Allocator>
+	inline bool	operator!=(const vector<T, Allocator> &x, vector<T, Allocator> &y){
+
+		return (!(x == y));
+	}
+
+	template<typename T, typename Allocator>		
+	inline bool	operator<(const vector<T, Allocator> &x, vector<T, Allocator> &y){
+		
+		return (lexicographical_compare(x.begin(), x.end(), y.begin(), y.end()));
+	}
+	
+	template<typename T, typename Allocator>		
+	inline bool	operator>(const vector<T, Allocator> &x, vector<T, Allocator> &y){
+
+		return (y < x);
+	}
+		
+	template<typename T, typename Allocator>		
+	inline bool	operator<=(const vector<T, Allocator> &x, vector<T, Allocator> &y){
+
+		return (!(y < x));
+	}
+		
+	template<typename T, typename Allocator>		
+	inline bool	operator>=(const vector<T, Allocator> &x, vector<T, Allocator> &y){
+		
+		return (!(x < y));
+	}
+
+	template<typename T, typename Allocator>		
+	inline void	swap(const vector<T, Allocator> &x, vector<T, Allocator> &y){
+		
+		x.swap(y);
+	}
 }
 
 #endif
