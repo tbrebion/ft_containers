@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 11:54:23 by tbrebion          #+#    #+#             */
-/*   Updated: 2022/11/30 18:06:11 by tbrebion         ###   ########.fr       */
+/*   Updated: 2022/12/01 19:27:11 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -399,6 +399,11 @@ namespace ft{
 				}
 				else{
 
+					/////////////////////////////
+					/////////////////////////////
+					//  FIX INSERT (len)
+					/////////////////////////////
+					/////////////////////////////
 					size_type len = size() ? 2 * size() : ft::init_page_size<size_type>();
 					pointer tmp = vector_allocator.allocate(len);
 					pointer y = tmp;
