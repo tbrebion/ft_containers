@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 11:54:23 by tbrebion          #+#    #+#             */
-/*   Updated: 2022/12/01 19:27:11 by tbrebion         ###   ########.fr       */
+/*   Updated: 2022/12/02 19:14:23 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,11 +200,20 @@ namespace ft{
 				return (this->V_start == this->V_finish);
 			}
 
+			class	reserveException : public std::exception{
+
+				public:
+					const char* what() const throw(){
+
+						return ("vector::reserve");
+					}
+			};
+
 			void	reserve(size_type n){
 
 				if (n > max_size()){
 
-					return;
+					throw reserveException();
 				}
 				if (n > capacity()){
 
@@ -399,12 +408,7 @@ namespace ft{
 				}
 				else{
 
-					/////////////////////////////
-					/////////////////////////////
-					//  FIX INSERT (len)
-					/////////////////////////////
-					/////////////////////////////
-					size_type len = size() ? 2 * size() : ft::init_page_size<size_type>();
+					size_type len = size() ? 2 * size() : 1;
 					pointer tmp = vector_allocator.allocate(len);
 					pointer y = tmp;
 					for (iterator it = begin(); it != position; ++it, ++y){
@@ -619,7 +623,7 @@ namespace ft{
 	}
 
 	template<typename T, typename Allocator>		
-	inline void	swap(const vector<T, Allocator> &x, const vector<T, Allocator> &y){
+	inline void	swap(vector<T, Allocator> &x, vector<T, Allocator> &y){
 		
 		x.swap(y);
 	}

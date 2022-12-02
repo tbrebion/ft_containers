@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 12:25:58 by tbrebion          #+#    #+#             */
-/*   Updated: 2022/11/30 16:00:55 by tbrebion         ###   ########.fr       */
+/*   Updated: 2022/12/02 17:39:43 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,13 +105,6 @@ namespace ft{
 
 				return (i[n]);
 			}
-
-			// template<typename U>
-			// friend class normal_iterator;
-
-			// template<typename T, typename Allocator>
-			// friend class vector;
-			// class friend.....
 	};
 
 	template<typename Iter>

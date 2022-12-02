@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 13:49:27 by tbrebion          #+#    #+#             */
-/*   Updated: 2022/11/28 14:55:33 by tbrebion         ###   ########.fr       */
+/*   Updated: 2022/12/02 17:25:45 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,11 @@ namespace ft{
 		return ((x < y) ? y : x);
 	}
 
-	template<typename Tp>
-	Tp	init_page_size(){
+	// template<typename Tp>
+	// Tp	init_page_size(){
 
-		return (ft::max(Tp(1), Tp(4096 / sizeof(Tp))));
-	}
+	// 	return (ft::max(Tp(1), Tp(4096 / sizeof(Tp))));
+	// }
 }
 
 #endif

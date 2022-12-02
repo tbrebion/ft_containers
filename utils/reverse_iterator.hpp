@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 15:14:36 by tbrebion          #+#    #+#             */
-/*   Updated: 2022/11/30 18:14:36 by tbrebion         ###   ########.fr       */
+/*   Updated: 2022/12/02 19:16:37 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ namespace ft{
 			explicit reverse_iterator(Iter x) : current(x) {}
 
 			template<typename U>
-			reverse_iterator(const reverse_iterator<U> &u) : current(u.base) {}
-			
+			reverse_iterator(const reverse_iterator<U> &u) : current(u.base()) {}
+						
 			Iter base()const { 
 				return (current);
 			}
@@ -120,8 +120,20 @@ namespace ft{
 		return (x.base() == y.base());
 	}
 	
+	template<typename Iter1, typename Iter2>
+	bool	operator==(const reverse_iterator<Iter1> &x, const reverse_iterator<Iter2> &y){
+
+		return (x.base() == y.base());
+	}
+	
 	template<typename Iter>
 	bool	operator!=(const reverse_iterator<Iter> &x, const reverse_iterator<Iter> &y){
+
+		return (x.base() != y.base());
+	}
+	
+	template<typename Iter1, typename Iter2>
+	bool	operator!=(const reverse_iterator<Iter1> &x, const reverse_iterator<Iter2> &y){
 
 		return (x.base() != y.base());
 	}
@@ -129,25 +141,49 @@ namespace ft{
 	template<typename Iter>
 	bool	operator<(const reverse_iterator<Iter> &x, const reverse_iterator<Iter> &y){
 
-		return (x.base() < y.base());
+		return (x.base() > y.base());
 	}
 	
-	template<typename Iter>
-	bool	operator<=(const reverse_iterator<Iter> &x, const reverse_iterator<Iter> &y){
-
-		return (x.base() <= y.base());
-	}
-
-	template<typename Iter>
-	bool	operator>(const reverse_iterator<Iter> &x, const reverse_iterator<Iter> &y){
+	template<typename Iter1, typename Iter2>
+	bool	operator<(const reverse_iterator<Iter1> &x, const reverse_iterator<Iter2> &y){
 
 		return (x.base() > y.base());
 	}
 	
 	template<typename Iter>
-	bool	operator>=(const reverse_iterator<Iter> &x, const reverse_iterator<Iter> &y){
+	bool	operator<=(const reverse_iterator<Iter> &x, const reverse_iterator<Iter> &y){
 
 		return (x.base() >= y.base());
+	}
+
+	template<typename Iter1, typename Iter2>
+	bool	operator<=(const reverse_iterator<Iter1> &x, const reverse_iterator<Iter2> &y){
+
+		return (x.base() >= y.base());
+	}
+
+	template<typename Iter>
+	bool	operator>(const reverse_iterator<Iter> &x, const reverse_iterator<Iter> &y){
+
+		return (x.base() < y.base());
+	}
+	
+	template<typename Iter1, typename Iter2>
+	bool	operator>(const reverse_iterator<Iter1> &x, const reverse_iterator<Iter2> &y){
+
+		return (x.base() < y.base());
+	}
+	
+	template<typename Iter>
+	bool	operator>=(const reverse_iterator<Iter> &x, const reverse_iterator<Iter> &y){
+
+		return (x.base() <= y.base());
+	}
+
+	template<typename Iter1, typename Iter2>
+	bool	operator>=(const reverse_iterator<Iter1> &x, const reverse_iterator<Iter2> &y){
+
+		return (x.base() <= y.base());
 	}
 
 	template<typename Iter>
@@ -157,11 +193,25 @@ namespace ft{
 		return (y.base() - x.base());
 	}
 		
+	template<typename Iter1, typename Iter2>
+	typename reverse_iterator<Iter1>::difference_type
+		operator-(const reverse_iterator<Iter1> &x, const reverse_iterator<Iter2> &y){
+
+		return (y.base() - x.base());
+	}
+	
 	template<typename Iter>
 	reverse_iterator<Iter>	
 		operator+(typename reverse_iterator<Iter>::difference_type n, const reverse_iterator<Iter> &x){
 
 		return 	(reverse_iterator<Iter>(x.base() - n));
+	}
+	
+	template<typename Iter1, typename Iter2>
+	reverse_iterator<Iter1>	
+		operator+(typename reverse_iterator<Iter1>::difference_type n, const reverse_iterator<Iter2> &x){
+
+		return 	(reverse_iterator<Iter1>(x.base() - n));
 	}
 }
 
