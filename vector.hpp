@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 11:54:23 by tbrebion          #+#    #+#             */
-/*   Updated: 2022/12/02 19:14:23 by tbrebion         ###   ########.fr       */
+/*   Updated: 2022/12/06 17:01:05 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ namespace ft{
 			typedef typename Allocator::size_type 			size_type;
 			typedef typename Allocator::difference_type 	difference_type;
 
-			typedef ft::normal_iterator<pointer/* , vector */> 		iterator;
-			typedef ft::normal_iterator<const_pointer/* , vector */> 	const_iterator;
+			typedef ft::normal_iterator<pointer> 		iterator;
+			typedef ft::normal_iterator<const_pointer> 	const_iterator;
 			typedef ft::reverse_iterator<iterator>		 		reverse_iterator;
 			typedef ft::reverse_iterator<const_iterator>		const_reverse_iterator;
 
@@ -121,8 +121,9 @@ namespace ft{
 					return (*this);
 				}
 				clear();
+				size_type cap_tmp = this->capacity();
 				vector_allocator.deallocate(this->V_start, this->V_end_of_storage - this->V_start);
-				pointer tmp = vector_allocator.allocate(x.size());
+				pointer tmp = vector_allocator.allocate(cap_tmp > x.capacity() ? cap_tmp : x.capacity());
 				pointer y = tmp;
 				for (const_iterator it = x.begin(); it != x.end(); ++it, ++y){
 
@@ -130,7 +131,7 @@ namespace ft{
 				}
 				this->V_start = tmp;
 				this->V_finish = tmp + x.size();
-				this->V_end_of_storage = tmp + x.capacity();
+				this->V_end_of_storage = (tmp + cap_tmp) > (tmp + x.capacity()) ? (tmp + cap_tmp) : (tmp + x.capacity());
 				return (*this);
 			}
 
@@ -214,6 +215,8 @@ namespace ft{
 				if (n > max_size()){
 
 					throw reserveException();
+					// std::cout << "length error" << std::endl;
+					// return;
 				}
 				if (n > capacity()){
 
@@ -302,7 +305,7 @@ namespace ft{
 				return (position);
 			}
 
-			iterator	erase(iterator first, iterator last){ //   FIX
+			iterator	erase(iterator first, iterator last){
 
 				pointer pos = first.base();
 				for (pointer pos2 = last.base(); pos2 != this->V_finish; ++pos2, ++pos){
@@ -475,7 +478,8 @@ namespace ft{
 				else{
 
 					size_type len = size() + n;
-					pointer y = vector_allocator.allocate(len);
+					size_type endS = (len > (size() * 2)) ? len : (size() * 2);
+					pointer y = vector_allocator.allocate(endS);
 					pointer z = y;
 					for (iterator it = begin(); it != position; ++it, ++z){
 
@@ -493,7 +497,7 @@ namespace ft{
 					vector_allocator.deallocate(this->V_start, this->V_end_of_storage - this->V_start);
 					this->V_start = y;
 					this->V_finish = y + len;
-					this->V_end_of_storage = this->V_finish;
+					this->V_end_of_storage = y + endS;
 				}
 			}
 			
@@ -537,7 +541,7 @@ namespace ft{
 						this->V_finish = ptr;
 						for (iterator it1 = end() - n, it2 = position + diff; it2 != position; ){
 
-							--(*it1) = --(*it2);
+							*(--it1) = *(--it2);
 						}
 						for (iterator it = position; first != last; ++it, ++first){
 
