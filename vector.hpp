@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 11:54:23 by tbrebion          #+#    #+#             */
-/*   Updated: 2022/12/06 17:01:05 by tbrebion         ###   ########.fr       */
+/*   Updated: 2022/12/06 17:34:58 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,9 +214,7 @@ namespace ft{
 
 				if (n > max_size()){
 
-					throw reserveException();
-					// std::cout << "length error" << std::endl;
-					// return;
+						throw reserveException();
 				}
 				if (n > capacity()){
 
