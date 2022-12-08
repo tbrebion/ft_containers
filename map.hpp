@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 14:30:23 by tbrebion          #+#    #+#             */
-/*   Updated: 2022/12/07 18:23:52 by tbrebion         ###   ########.fr       */
+/*   Updated: 2022/12/08 18:23:06 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,7 @@ namespace ft{
 
 	template<
 		typename Key, 
-		typename T, 
-		typename Compare = std::less<Key>, 
-		typename Allocator = std::allocator<pair<const Key, T>> 
-	>
+		typename T, typename Compare = std::less<Key>, typename Allocator = std::allocator<pair<const Key, T>> >
 	class map{
 
 		
