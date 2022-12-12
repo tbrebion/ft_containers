@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 13:49:27 by tbrebion          #+#    #+#             */
-/*   Updated: 2022/12/09 18:14:03 by tbrebion         ###   ########.fr       */
+/*   Updated: 2022/12/12 14:06:35 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,9 @@ namespace ft{
 			avlNode<T>	*parent;
 			int			height;
 			
-			avlNode() : data(nullptr), left(nullptr), right(nullptr), parent(nullptr), height(0) 
+			avlNode() : data(NULL), left(NULL), right(NULL), parent(NULL), height(0) 
 			{}
-			avlNode(value_type val) : data(val), left(nullptr), right(nullptr), parent(nullptr), height(0) 
+			avlNode(value_type val) : data(val), left(NULL), right(NULL), parent(NULL), height(0) 
 			{}
 			avlNode(const avlNode &nd) : data(nd.data), left(nd.left), right(nd.right), parent(nd.parent), height(nd.height), bf(nd.bf) 
 			{}
@@ -87,7 +87,7 @@ namespace ft{
 	template<typename T>
 	bool	operator==(const avlNode<T> &x, const avlNode<T> &y){
 
-		if (x.data == nullptr && y.data == nullptr)
+		if (x.data == NULL && y.data == NULL)
 			return (true);
 		return (x.data == y.data);
 	}
