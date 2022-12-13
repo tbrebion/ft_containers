@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 14:09:59 by tbrebion          #+#    #+#             */
-/*   Updated: 2022/12/13 13:26:55 by tbrebion         ###   ########.fr       */
+/*   Updated: 2022/12/13 19:15:41 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,446 @@ namespace ft{
 
 			void	deleteNode(ft::avlNode<T> *node){
 
+				p_alloc.destroy(node->data);
+				p_alloc.deaalocate(node->data, 1);
+				node->data = NULL;
+				n_alloc.deallocate(node, 1);
+				node = NULL;
+			}
+
+			void	clear(){
+
+				_size = 0;
+			}
+
+			iterator	begin(){
+
+				ft::avlNode<T>	*first = find(findMin(_root).first);
+				return (iterator(first, this));
+			}
+
+			iterator	end(){
+
+				return (iterator(NULL, this));
+			}
+
+			const_iterator	begin()const{
+
+				ft::avlNode<T>	*first = find(findMin(_root).first);
+				return (iterator(first, this));
+			}
+
+			const_iterator	end()const{
+
+				return (iterator(NULL, this));
+			}
+			
+			reverse_iterator	rbegin(){
+
+				return(reverse_iterator(end()));
+			}
+
+			reverse_iterator	rend(){
+
+				return (reverse_iterator(begin()));
+			}
+
+			const_reverse_iterator	rbegin()const{
+
+				return(reverse_iterator(end()));
+			}
+
+			const_reverse_iterator	rend()const{
+
+				return (reverse_iterator(begin()));
+			}
+
+			ft::avlNode<T>	*newNode(T obj){
+
+				ft::avlNode<T>	*node = n_alloc.allocate(1);
+				n_alloc.construct(node);
+				node->data = p_alloc.allocate(1);
+				p_alloc.construct(node->data, obj);
+				return (node);
+			}
+
+			int	height(){
+
+				if (_root == NULL){
+
+					return (0);
+				}
+				return (height(_root - 1));
+			}
+
+			bool	contains(key k){
+
+				return (contains(_root, k));
+			}
+			
+			bool	insert(T value){
+
+				if (!contains(_root, value.first)){
+
+					_root = insert(_root, value);
+					_root->parent = NULL;
+					_size++;
+					return (true);
+				}
+				return (false);
+			}
+
+			bool	remove(key val){
+
+				if (contains(_root, val)){
+
+					_root = remove(_root, val);
+					_root->parent = NULL;
+					_size--;
+					return (true);
+				}
+				return (false);
+			}
+
+			ft::avlNode<T>	*find(key val){
+
+				if (conatins(_root, val)){
+
+					return (find(_root, val));
+				}
+				return (NULL);
+			}
+			ft::avlNode<T>	*find(key val)const{
+
+				if (conatins(_root, val)){
+
+					return (find(_root, val));
+				}
+				return (NULL);
+			}
+
+			iterator	bound(key val, std::string s){
+
+				ft::avlNode<T>	*con = NULL;
 				
+				if (s == "lower"){
+
+					lower_bound(_root, val, &con);
+					if (!con){
+
+						return (iterator(NULL, this))
+					}
+					else{
+
+						return (iterator(con, this));
+					}
+				}
+				else{
+
+					upper_bound(_root, val, &con);
+					if (!con){
+
+						return (iterator(NULL, this))
+					}
+					else{
+
+						return (iterator(con, this));
+					}					
+				}
+				return (iterator(NULL, this));
+			}
+
+			const_iterator	bound(key val, std::string s){
+
+				ft::avlNode<T>	*con = NULL;
+				
+				if (s == "lower"){
+
+					lower_bound(_root, val, &con);
+					if (!con){
+
+						return (const_iterator(NULL, this))
+					}
+					else{
+
+						return (const_iterator(con, this));
+					}
+				}
+				else{
+
+					upper_bound(_root, val, &con);
+					if (!con){
+
+						return (const_iterator(NULL, this))
+					}
+					else{
+
+						return (const_iterator(con, this));
+					}					
+				}
+				return (iterator(NULL, this));
+			}
+			
+			size_t	get_alloc()const{
+
+				return (n_alloc.max_size());
+			}
+
+			node_alloc	get_allocator()const{
+
+				return (n_alloc);
+			}
+
+			ft::avlNode<T>	*get_root()const{
+
+				return (_root);
+			}
+
+			ft::avlNode<T>	*findm(ft::avlNode<T> *node){
+
+				while (node->left != NULL){
+
+					node = node->left;
+				}
+				return (node);
+			}
+			
+			ft::avlNode<T>	*findM(ft::avlNode<T> *node){
+
+				while (node->right != NULL){
+
+					node = node->right;
+				}
+				return (node);
+			}
+
+			ft::avlNode<T>	*findm(ft::avlNode<T> *node)const{
+
+				while (node->left != NULL){
+
+					node = node->left;
+				}
+				return (node);
+			}
+			
+			ft::avlNode<T>	*findM(ft::avlNode<T> *node)const{
+
+				while (node->right != NULL){
+
+					node = node->right;
+				}
+				return (node);
+			}
+
+		private:
+		
+			int	height(ft::avlNode<T> *node){
+
+				if (node == NULL)
+					return (-1);
+				int	leftHeight = height(node->left) + 1;
+				int	rightHeight = height(node->right) + 1;
+				if (leftHeight > rightHeight)
+					return (leftHeight);
+				return (rightHeight);
+			}
+			
+			bool	contains(ft::avlNode<T> *node, key k)const{
+
+				if (node == NULL)
+					return (false);
+				bool cmp = _comp(node->data->first, k);
+				bool cmp1 = _comp(k, node->data->first);
+				if (!cmp1 && !cmp)
+					return (true);
+				if (!cmp)
+					return (contains(node->left, k));
+				if (cmp)
+					return (contains(node->right, k));
+				return (true);
+			}
+
+			ft::avlNode<T>	*insert(ft::avlNode<T> *node, T val){
+
+				if (node == NULL)
+					return (newNode(val));
+				bool cmp = _comp(val.first, node->data->first);
+				if (cmp){
+
+					node->left = insert(node->left, val);
+					node->left->parent = node;
+				}
+				else if(!cmp){
+
+					node->right = insert(node->right, val);
+					node->right->parent = node;					
+				}
+				update(node);
+				return (balance(node));
+			}
+
+			void	update(ft::avlNode<T> *node){
+
+				int leftNodeHeight = (node->left == NULL) ? -1 : node->left->height;
+				int rightNodeHeight = (node->right == NULL) ? -1 : node->right->height;
+				node->height = 1 + ft::max(leftNodeHeight, rightNodeHeight);
+				node->bf = rightNodeHeight - leftNodeHeight;
+			}
+			
+			ft::avlNode<T>	*balance(ft:avlNode<T> *node){
+
+				if (node->bf == -2){
+
+					if (node->left->bf <= 0)
+						return (leftleftCase(node));
+					else
+						return (leftrightCase(node))
+				}
+				else if (node->bf == 2){
+
+					if (node->right->bf >= 0)
+						return (rightrightCase(node));
+					else
+						return (rightleftCase(node));
+				}
+				return (node);
+			}
+
+			ft::avlNode<T>	*leftleftCase(ft::avlNode<T> *node){
+
+				return (rightRotation(node));
+			}
+			
+			ft::avlNode<T>	*leftrightCase(ft::avlNode<T> *node){
+
+				node->left = leftRotation(node->left);
+				return (leftleftCase(node));
+			}
+
+			ft::avlNode<T>	*rightrightCase(ft::avlNode<T> *node){
+
+				return (leftRotation(node));
+			}
+			
+			ft::avlNode<T>	*rightleftCase(ft::avlNode<T> *node){
+
+				node->right = rightRotation(node->right);
+				return (rightrightCase(node));
+			}
+
+			ft::avlNode<T>	*leftRotation(ft::avlNode<T> *node){
+
+				ft::avlNode<T>	*tmp = node->right;
+				node->right = tmp->left;
+				tmp->left = node;
+				resetParent(node, tmp);
+				update(node);
+				update(tmp);
+				return (tmp);
+			}
+			
+			ft::avlNode<T>	*rightRotation(ft::avlNode<T> *node){
+				
+				ft::avlNode<T>	*tmp = node->left;
+				node->left = tmp->right;
+				tmp->right = node;
+				resetParent(node, tmp);
+				update(node);
+				update(tmp);
+				return (tmp);
+			}
+
+			void	resetParent(ft::avlNode<T> *oldRoot, ft::avlNode<T> *newRoot)const{
+
+				if (!oldRoot->parent){
+
+					newRoot->parent = NULL;
+					if (oldRoot->left)
+						oldRoot->left->parent = oldRoot;
+					if (oldRoot->right)
+						oldRoot->right->parent = oldRoot;
+					oldRoot->parent = newRoot;
+					return;
+				}
+				newRoot->parent = oldRoot->parent;
+				oldRoot->parent = newRoot;
+				if (oldRoot->left)
+					oldRoot->left->parent = oldRoot;
+				if (oldRoot->right)
+					oldRoot->right->parent = oldRoot;
+			}
+
+			ft::avlNode<T>	*remove(ft::avlNode<T> *node, key val){
+
+				if (node == NULL)
+					return (NULL);
+				int cmp = _comp(val, node->data->first);  ////bool
+				bool cmp1 = _cmp(node->data->first, val);
+				if (!cmp && !cmp1){
+
+					if (node->left == NULL)
+						return (node->right);
+					else if (node->right == NULL)
+						return (node->left);
+					else{
+
+						if (height(node->left) > height(node->right)){
+
+							T Svalue = findMax(node->left);
+							node->data = &Svalue;
+							node->left = remove(node->left, Svalue.first);
+						}
+						else{
+
+							T Svalue = findMin(node->right);
+							node->data = &Svalue;
+							node->right = remove(node->right, Svalue.first);							
+						}
+					}
+				}
+				else if (cmp)
+					node->left = remove(node->left, val);
+				else if (!cmp)
+					node->right = remove(node->right, val);
+				update(node);
+				return (balance(node));
+			}
+
+			ft::avlNode<T>	*find(ft::avlNode<T> *node, key val){
+
+				if (node == NULL)
+					return (NULL);
+				bool cmp = _cmp(node->data->first, val);
+				bool cmp1 = _cmp(val, node->data->first);
+				if (!cmp && !cmp1)
+					return (node);
+				if (!cmp)
+					return (find(node->left, val));
+				else if(cmp)
+					return (find(node->right, val));
+				return (node);
+			}
+
+			ft::avlNode<T>	*find(ft::avlNode<T> *node, key val)const{
+
+				if (node == NULL)
+					return (NULL);
+				bool cmp = _cmp(node->data->first, val);
+				bool cmp1 = _cmp(val, node->data->first);
+				if (!cmp && !cmp1)
+					return (node);
+				if (!cmp)
+					return (find(node->left, val));
+				else if(cmp)
+					return (find(node->right, val));
+				return (node);
+			}
+
+			void	lower_bound(ft::avlNode<T> *node, key val, ft::avlNode<T> **con)const{
+
+				if (node == NULL)
+					return (NULL);
+				//////////////////////////
 			}
 			
 		private:
