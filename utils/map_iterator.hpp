@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:43:57 by tbrebion          #+#    #+#             */
-/*   Updated: 2022/12/12 18:19:38 by tbrebion         ###   ########.fr       */
+/*   Updated: 2022/12/13 13:09:55 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ namespace ft{
 
 				(*this) = x;
 			}
-			/* virtual */ ~map_iterator() {}
+			virtual ~map_iterator() {}
 
 			node	*base()const {
 
