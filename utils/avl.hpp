@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 14:09:59 by tbrebion          #+#    #+#             */
-/*   Updated: 2022/12/13 19:15:41 by tbrebion         ###   ########.fr       */
+/*   Updated: 2022/12/16 12:25:27 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -530,7 +530,80 @@ namespace ft{
 
 				if (node == NULL)
 					return (NULL);
-				//////////////////////////
+				bool cmp = _cmp(node->data->first, val);
+				bool cmp1 = _cmp(val, node->data->first);
+				if (!cmp && !cmp1){
+
+					*con = node;
+					return;
+				}
+				if (!cmp)
+					lower_bound(node->left, val, con);
+				if (*con == NULL && !cmp){
+
+					*con = node;
+					return;
+				}
+				if (cmp)
+					lower_bound(node->right, val, con);
+			}
+			
+			void	upper_bound(ft::avlNode<T> *node, key val, ft::avlNode<T> **con)const{
+
+				if (node == NULL)
+					return (NULL);
+				bool cmp = _cmp(node->data->first, val);
+				bool cmp1 = _cmp(val, node->data->first);
+				if (!cmp && !cmp1){
+
+					*con = node->right;
+					return;
+				}
+				if (!cmp)
+					upper_bound(node->left, val, con);
+				if (*con == NULL && !cmp){
+
+					*con = node;
+					return;
+				}
+				if (cmp)
+					upper_bound(node->right, val, con);
+			}
+			
+			T	findMin(ft::avlNode<T> *node){
+
+				if (node == NULL)
+					return (ft::make_pair(key(), value()));
+				while (node->left != NULL)
+					node = node->left;
+				return (*(node->data));
+			}
+			
+			T	findMax(ft::avlNode<T> *node){
+
+				if (node == NULL)
+					return (ft::make_pair(key(), value()));
+				while (node->right != NULL)
+					node = node->right;
+				return (*(node->data));
+			}
+			
+			T	findMin(ft::avlNode<T> *node)const{
+
+				if (node == NULL)
+					return (ft::make_pair(key(), value()));
+				while (node->left != NULL)
+					node = node->left;
+				return (*(node->data));
+			}
+			
+			T	findMax(ft::avlNode<T> *node)const{
+
+				if (node == NULL)
+					return (ft::make_pair(key(), value()));
+				while (node->right != NULL)
+					node = node->right;
+				return (*(node->data));
 			}
 			
 		private:
