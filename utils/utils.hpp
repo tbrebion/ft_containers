@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 13:49:27 by tbrebion          #+#    #+#             */
-/*   Updated: 2022/12/12 14:06:35 by tbrebion         ###   ########.fr       */
+/*   Updated: 2022/12/18 15:12:56 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,14 +98,14 @@ namespace ft{
 		return (!(x.data == y.data));
 	}
 
-	template<typename T>
-	struct less : std::binary_function<T, T, bool>{
+	// template<typename T>
+	// struct less : std::binary_function<T, T, bool>{
 
-		bool	operator()(const T &x, const T &y)const{
+	// 	bool	operator()(const T &x, const T &y)const{
 
-			return (x < y);
-		}
-	};	
+	// 		return (x < y);
+	// 	}
+	// };	
 }
 
 #endif

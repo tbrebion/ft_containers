@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 14:30:23 by tbrebion          #+#    #+#             */
-/*   Updated: 2022/12/16 17:37:55 by tbrebion         ###   ########.fr       */
+/*   Updated: 2022/12/18 15:32:55 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 namespace ft{
 
 	template<typename Key, 
-		typename T, typename Compare = std::less<Key>, typename Allocator = std::allocator<pair<const Key, T>> >
+		typename T, typename Compare = std::less<Key>, typename Allocator = std::allocator<pair<const Key, T> > >
 	class map{
 
 		public:
@@ -144,7 +144,7 @@ namespace ft{
 				return (value_compare(_cmp));
 			}
 
-			mapped_type &operator[](key &k){
+			mapped_type &operator[](Key &k){
 
 				if (_avl.find(k) == NULL)
 					return ((insert(ft::make_pair(k, mapped_type())).first)->second);
@@ -226,9 +226,43 @@ namespace ft{
 				return (_avl.contains(x));
 			}
 
-			/////////////////////////////
+			iterator	lower_bound(const key_type &x){
+
+				return (_avl.bound(x, "lower"));
+			}
 			
+			const_iterator	lower_bound(const key_type &x)const{
+
+				return (_avl.bound(x, "lower"));
+			}
 			
+			iterator	upper_bound(const key_type &x){
+
+				return (_avl.bound(x, "upper"));
+			}
+			
+			const_iterator	upper_bound(const key_type &x)const{
+
+				return (_avl.bound(x, "upper"));
+			}
+
+			ft::pair<iterator, iterator>	equal_range(const key_type &x){
+
+				ft::pair<iterator, iterator> ret = ft::make_pair(lower_bound(x), upper_bound(x));
+				return (ret);
+			}
+
+			ft::pair<const_iterator, const_iterator>	equal_range(const key_type &x)const{
+
+				ft::pair<const_iterator, const_iterator> ret = ft::make_pair(lower_bound(x), upper_bound(x));
+				return (ret);
+			}
+
+			allocator_type	get_allocator()const{
+
+				return (_avl.get_allocator());
+			}
+
 		private:
 			tree			_avl;
 			allocator_type	_alloc;
@@ -236,6 +270,53 @@ namespace ft{
 				
 	};
 	
+	template<typename Key, typename T, typename Compare, typename Alloc>
+	bool	operator==(const map<Key, T, Compare, Alloc> &x, const map<Key, T, Compare, Alloc> &y){
+
+		if (x.size() != y.size())
+			return (x.size() == y.size());
+		return (ft::equal(x.begin(), x.end(), y.begin()));
+	}
+	
+	template<typename Key, typename T, typename Compare, typename Alloc>
+	bool	operator!=(const map<Key, T, Compare, Alloc> &x, const map<Key, T, Compare, Alloc> &y){
+
+		return (!(x == y));
+	}
+		
+	template<typename Key, typename T, typename Compare, typename Alloc>
+	bool	operator<(const map<Key, T, Compare, Alloc> &x, const map<Key, T, Compare, Alloc> &y){
+
+		return (ft::lexicographical_compare(x.begin(), x.end(), y.begin(), y.end()));
+	}
+		
+	template<typename Key, typename T, typename Compare, typename Alloc>
+	bool	operator>(const map<Key, T, Compare, Alloc> &x, const map<Key, T, Compare, Alloc> &y){
+
+		return (ft::lexicographical_compare(y.begin(), y.end(), x.begin(), x.end()));
+	}
+	
+	template<typename Key, typename T, typename Compare, typename Alloc>
+	bool	operator<=(const map<Key, T, Compare, Alloc> &x, const map<Key, T, Compare, Alloc> &y){
+
+		if (x < y || x == y)
+			return (true);
+		return (false);
+	}
+		
+	template<typename Key, typename T, typename Compare, typename Alloc>
+	bool	operator>=(const map<Key, T, Compare, Alloc> &x, const map<Key, T, Compare, Alloc> &y){
+
+		if (x > y || x == y)
+			return (true);
+		return (false);
+	}
+	
+	template<typename Key, typename T, typename Compare, typename Alloc>
+	void	swap(map<Key, T, Compare, Alloc> &x, map<Key, T, Compare, Alloc> &y){
+
+		x.swap(y);
+	}
 }
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:43:57 by tbrebion          #+#    #+#             */
-/*   Updated: 2022/12/13 13:09:55 by tbrebion         ###   ########.fr       */
+/*   Updated: 2022/12/18 15:36:08 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,7 @@ namespace ft{
 		private:
 			node		*_ptr;
 			const tree 	*_tree;
-			compare		*_cmp
+			compare		*_cmp;
 	};
 }
 

@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 14:09:59 by tbrebion          #+#    #+#             */
-/*   Updated: 2022/12/16 12:25:27 by tbrebion         ###   ########.fr       */
+/*   Updated: 2022/12/18 15:31:42 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -377,14 +377,14 @@ namespace ft{
 				node->bf = rightNodeHeight - leftNodeHeight;
 			}
 			
-			ft::avlNode<T>	*balance(ft:avlNode<T> *node){
+			ft::avlNode<T>	*balance(ft::avlNode<T> *node){
 
 				if (node->bf == -2){
 
 					if (node->left->bf <= 0)
 						return (leftleftCase(node));
 					else
-						return (leftrightCase(node))
+						return (leftrightCase(node));
 				}
 				else if (node->bf == 2){
 
@@ -529,7 +529,7 @@ namespace ft{
 			void	lower_bound(ft::avlNode<T> *node, key val, ft::avlNode<T> **con)const{
 
 				if (node == NULL)
-					return (NULL);
+					return;
 				bool cmp = _cmp(node->data->first, val);
 				bool cmp1 = _cmp(val, node->data->first);
 				if (!cmp && !cmp1){
@@ -551,7 +551,7 @@ namespace ft{
 			void	upper_bound(ft::avlNode<T> *node, key val, ft::avlNode<T> **con)const{
 
 				if (node == NULL)
-					return (NULL);
+					return;
 				bool cmp = _cmp(node->data->first, val);
 				bool cmp1 = _cmp(val, node->data->first);
 				if (!cmp && !cmp1){
