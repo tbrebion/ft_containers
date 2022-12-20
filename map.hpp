@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 14:30:23 by tbrebion          #+#    #+#             */
-/*   Updated: 2022/12/18 15:32:55 by tbrebion         ###   ########.fr       */
+/*   Updated: 2022/12/20 16:36:25 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #define MAP_HPP
 
 #include "vector.hpp"
-#include "utils/map_iterator.hpp"
+#include "utils/avl.hpp"
 
 namespace ft{
 
@@ -49,15 +49,17 @@ namespace ft{
 			typedef typename allocator_type::const_reference									const_reference;
 			typedef typename allocator_type::pointer											pointer;
 			typedef typename allocator_type::const_pointer										const_pointer;
-			typedef typename allocator_type::difference_type									difference_type; /////////////////////
 			typedef ft::avl<value_type, Compare, Allocator>										tree;
 			typedef typename ft::avl<value_type, Compare, Allocator>::iterator					iterator;
 			typedef typename ft::avl<value_type, Compare, Allocator>::const_iterator			const_iterator;
 			typedef typename ft::avl<value_type, Compare, Allocator>::reverse_iterator			reverse_iterator;
 			typedef typename ft::avl<value_type, Compare, Allocator>::const_reverse_iterator	const_reverse_iterator;
+			// typedef size_t																		size_type;
+			// typedef std::ptrdiff_t																difference_type;
 			typedef typename allocator_type::size_type											size_type;
+			typedef typename allocator_type::difference_type									difference_type; /////////////////////
 			
-			explicit map(const key_compare &cmp = key_compare(), const allocator_type &alloc = allocator_type()) : _cmp(cmp), _alloc(alloc) {}
+			explicit map(const key_compare &cmp = key_compare(), const allocator_type &alloc = allocator_type()) : _alloc(alloc), _cmp(cmp) {}
 			
 			template<typename InputIterator>
 			map(InputIterator first, InputIterator last, const key_compare &cmp = key_compare(), 
@@ -144,17 +146,24 @@ namespace ft{
 				return (value_compare(_cmp));
 			}
 
-			mapped_type &operator[](Key &k){
+			mapped_type &operator[](const Key &k){
 
 				if (_avl.find(k) == NULL)
 					return ((insert(ft::make_pair(k, mapped_type())).first)->second);
 				return (_avl.find(k)->data->second);
 			}
 
+			// mapped_type &operator[](Key k){
+
+			// 	if (_avl.find(k) == NULL)
+			// 		return ((insert(ft::make_pair(k, mapped_type())).first)->second);
+			// 	return (_avl.find(k)->data->second);
+			// }
+
 			ft::pair<iterator, bool>	insert(const value_type &x){
 
 				bool sec = _avl.insert(x);
-				iterator first = iterator(find(x.first), &_avl);
+				iterator first = iterator(_avl.find(x.first), &_avl);
 				ft::pair<iterator, bool> ret = ft::make_pair(first, sec);
 				return (ret);
 			}
@@ -166,7 +175,7 @@ namespace ft{
 				return (iterator(_avl.find(x.first), &_avl));
 			}
 			
-			template<InputIterator>
+			template<typename InputIterator>
 			void	insert(InputIterator first, InputIterator last){
 
 				for ( ; first != last; first++)

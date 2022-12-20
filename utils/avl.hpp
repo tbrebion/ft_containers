@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 14:09:59 by tbrebion          #+#    #+#             */
-/*   Updated: 2022/12/18 15:31:42 by tbrebion         ###   ########.fr       */
+/*   Updated: 2022/12/20 17:26:53 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ namespace ft{
 			}
 			~avl(){
 
-				deleteTree();
+				// deleteTree();
 			}
 			
 			avl	&assign(const avl &x){
@@ -48,7 +48,7 @@ namespace ft{
 				deleteTree();
 				n_alloc = x.n_alloc;
 				p_alloc = x.p_alloc;
-				_comp = x._comp;
+				_cmp = x._cmp;
 				for (const_iterator it = x.begin(); it != x.end(); it++){
 
 					insert(*it);
@@ -92,14 +92,15 @@ namespace ft{
 			void	deleteNode(ft::avlNode<T> *node){
 
 				p_alloc.destroy(node->data);
-				p_alloc.deaalocate(node->data, 1);
+				p_alloc.deallocate(node->data, 1);
 				node->data = NULL;
 				n_alloc.deallocate(node, 1);
 				node = NULL;
 			}
 
 			void	clear(){
-
+				
+				deleteTree();
 				_size = 0;
 			}
 
@@ -148,7 +149,7 @@ namespace ft{
 			ft::avlNode<T>	*newNode(T obj){
 
 				ft::avlNode<T>	*node = n_alloc.allocate(1);
-				n_alloc.construct(node);
+				n_alloc.construct(node, ft::avlNode<T>()); /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 				node->data = p_alloc.allocate(1);
 				p_alloc.construct(node->data, obj);
 				return (node);
@@ -163,7 +164,7 @@ namespace ft{
 				return (height(_root - 1));
 			}
 
-			bool	contains(key k){
+			bool	contains(key k)const{
 
 				return (contains(_root, k));
 			}
@@ -185,7 +186,8 @@ namespace ft{
 				if (contains(_root, val)){
 
 					_root = remove(_root, val);
-					_root->parent = NULL;
+					// if (_root)
+						// _root->parent = NULL;
 					_size--;
 					return (true);
 				}
@@ -194,15 +196,15 @@ namespace ft{
 
 			ft::avlNode<T>	*find(key val){
 
-				if (conatins(_root, val)){
-
+				if (contains(_root, val)){
+					
 					return (find(_root, val));
 				}
 				return (NULL);
 			}
 			ft::avlNode<T>	*find(key val)const{
 
-				if (conatins(_root, val)){
+				if (contains(_root, val)){
 
 					return (find(_root, val));
 				}
@@ -218,7 +220,7 @@ namespace ft{
 					lower_bound(_root, val, &con);
 					if (!con){
 
-						return (iterator(NULL, this))
+						return (iterator(NULL, this));
 					}
 					else{
 
@@ -230,7 +232,7 @@ namespace ft{
 					upper_bound(_root, val, &con);
 					if (!con){
 
-						return (iterator(NULL, this))
+						return (iterator(NULL, this));
 					}
 					else{
 
@@ -240,7 +242,7 @@ namespace ft{
 				return (iterator(NULL, this));
 			}
 
-			const_iterator	bound(key val, std::string s){
+			const_iterator	bound(key val, std::string s)const{
 
 				ft::avlNode<T>	*con = NULL;
 				
@@ -249,7 +251,7 @@ namespace ft{
 					lower_bound(_root, val, &con);
 					if (!con){
 
-						return (const_iterator(NULL, this))
+						return (const_iterator(NULL, this));
 					}
 					else{
 
@@ -261,7 +263,7 @@ namespace ft{
 					upper_bound(_root, val, &con);
 					if (!con){
 
-						return (const_iterator(NULL, this))
+						return (const_iterator(NULL, this));
 					}
 					else{
 
@@ -339,8 +341,8 @@ namespace ft{
 
 				if (node == NULL)
 					return (false);
-				bool cmp = _comp(node->data->first, k);
-				bool cmp1 = _comp(k, node->data->first);
+				bool cmp = _cmp(node->data->first, k);
+				bool cmp1 = _cmp(k, node->data->first);
 				if (!cmp1 && !cmp)
 					return (true);
 				if (!cmp)
@@ -354,7 +356,7 @@ namespace ft{
 
 				if (node == NULL)
 					return (newNode(val));
-				bool cmp = _comp(val.first, node->data->first);
+				bool cmp = _cmp(val.first, node->data->first);
 				if (cmp){
 
 					node->left = insert(node->left, val);
@@ -464,7 +466,7 @@ namespace ft{
 
 				if (node == NULL)
 					return (NULL);
-				int cmp = _comp(val, node->data->first);  ////bool
+				int cmp = _cmp(val, node->data->first);  ////bool
 				bool cmp1 = _cmp(node->data->first, val);
 				if (!cmp && !cmp1){
 
@@ -611,7 +613,7 @@ namespace ft{
 			node_alloc		n_alloc;
 			pair_alloc		p_alloc;
 			int				_size;
-			Compare			_comp;
+			Compare			_cmp;
 	};
 }
 

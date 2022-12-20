@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 13:49:27 by tbrebion          #+#    #+#             */
-/*   Updated: 2022/12/18 15:12:56 by tbrebion         ###   ########.fr       */
+/*   Updated: 2022/12/20 17:06:42 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ namespace ft{
 			{}
 			avlNode(value_type val) : data(val), left(NULL), right(NULL), parent(NULL), height(0) 
 			{}
-			avlNode(const avlNode &nd) : data(nd.data), left(nd.left), right(nd.right), parent(nd.parent), height(nd.height), bf(nd.bf) 
+			avlNode(const avlNode &nd) : data(nd.data), left(nd.left), right(nd.right), parent(nd.parent)/* , height(nd.height), bf(nd.bf) */ 
 			{}
 			~avlNode() {}
 			avlNode	&operator=(const avlNode &cp){

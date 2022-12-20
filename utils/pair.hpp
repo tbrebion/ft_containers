@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 11:00:57 by tbrebion          #+#    #+#             */
-/*   Updated: 2022/11/23 11:37:48 by tbrebion         ###   ########.fr       */
+/*   Updated: 2022/12/20 13:29:43 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ namespace ft{
 		Tp1		first;
 		Tp2		second;
 		
-		pair() {}
+		pair() : first(), second() {}
+
+		template<typename T1,  typename T2>
+		pair(const pair<T1, T2> &x) : first(x.first), second(x.second) {}
 
 		pair(const Tp1 &x, const Tp2 &y) : first(x), second(y) {}
 

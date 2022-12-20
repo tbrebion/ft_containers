@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 15:01:03 by tbrebion          #+#    #+#             */
-/*   Updated: 2022/12/18 15:22:16 by tbrebion         ###   ########.fr       */
+/*   Updated: 2022/12/20 17:26:16 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,51 +14,143 @@
 #include <vector>
 #include "stack.hpp"
 #include "map.hpp"
+#include <map>
 
 #define NAMESPACE ft
 
 using namespace NAMESPACE;
 
+// template <class Key, class T>
+// void	print(map<Key, T>& lst)
+// {
+// 	for (typename map<Key, T>::iterator it = lst.begin(); it != lst.end(); it++)
+// 		cout << it->first << " => " << it->second << '\n';
+// }
 
-template <class Key, class T>
-void	print(map<Key, T>& lst)
+
+int main ()
 {
-	for (typename map<Key, T>::iterator it = lst.begin(); it != lst.end(); it++)
-		cout << *it << ' ';
-	cout << '\n';
+  map<char,int> mymap;
+  map<char,int>::iterator it;
+
+  // insert some values:
+  mymap['a']=10;
+  mymap['b']=20;
+  mymap['c']=30;
+  mymap['d']=40;
+  mymap['e']=50;
+  mymap['f']=60;
+
+  it=mymap.find('b');
+  std::cout << "found b\n";
+  mymap.erase (it);                   // erasing by iterator
+  std::cout << "erase iterator to b\n";
+  mymap.erase ('c');                  // erasing by key
+  std::cout << "erase by key 'c'\n";
+  it=mymap.find ('e');
+  std::cout << "erase by range 'e' to end\n";
+  mymap.erase ( it, mymap.end() );    // erasing by range
+
+  std::cout << " display :\n";
+  // show content:
+  
+  it=mymap.begin();
+//   std::cout << it->first << std::endl;
+//   for (it=mymap.begin(); it!=mymap.end(); ++it){
+
+//     std::cout << it->first << " => " << it->second << '\n';
+//   }
+
+  return 0;
 }
 
-int main()
-{
-	pair<int, string>			my_pair(8, "salut");
-	map<int, string>			test;
-	map<int, string>::iterator	it;
 
-	test.insert(my_pair);
-	test.insert(pair<int, string>(-4, "bar"));
-	test.insert(pair<int, string>(2, "machin"));
-	test.insert(pair<int, string>(3, "foo"));
-	test.insert(pair<int, string>(746, "Marcel"));
-	test.insert(pair<int, string>(1, "truc"));
-	it = test.begin();
-	cout << '\n';
+// int main ()
+// {
+//   map<char,int> mymap;
 
-	while (it != test.end())
-	{
-		// cout << "start of while\n";
-		cout << it->first << ", " << it->second << '\n';
-		it++;
-// 		cout << "iterator incremented\n";
+//   mymap['x']=100;
+//   mymap['y']=200;
+//   mymap['z']=300;
 
-// #ifndef STD
-// 		cout << it.getPointer() << '\n';
-// 		cout << test.end().getPointer() << '\n';
-// #endif
+//   std::cout << "mymap contains:\n";
+//   for (map<char,int>::iterator it=mymap.begin(); it!=mymap.end(); ++it)
+//     std::cout << it->first << " => " << it->second << '\n';
 
-	}
-	cout << "End of display loop\n";
-}
+//   mymap.clear();
+//   mymap['a']=1101;
+//   mymap['b']=2202;
 
+//   std::cout << "mymap contains:\n";
+//   for (map<char,int>::iterator it=mymap.begin(); it!=mymap.end(); ++it)
+//     std::cout << it->first << " => " << it->second << '\n';
+
+//   return 0;
+// }
+
+// int main ()
+// {
+//   map<char,int> mymap;
+
+
+// 	if (mymap.begin() != mymap.end())
+// 		std::cout << "This should not happen\n";
+
+// 	///////////////////////////////////////
+// 	// char a = 'a'; 
+// 	// char b = 'b'; 
+// 	// char c = 'c'; 
+
+// 	// char &aref = a;
+// 	// char &bref = b;
+// 	// char &cref = c;
+// 	///////////////////////////////////////
+
+//   mymap['b'] = 100;
+//   mymap['a'] = 200;
+//   mymap['c'] = 300;
+// 	// mymap[bref] = 100;
+//   	// mymap[aref] = 200;
+//   	// mymap[cref] = 300;
+
+// 	if (mymap.begin() == mymap.end())
+// 		std::cout << "This is wrong\n";
+//   // show content:
+//   for (map<char,int>::iterator it=mymap.begin(); it!=mymap.end(); it++)
+//     std::cout << it->first << " => " << it->second << '\n';
+
+// 	std::cout << "Hello there\n";
+// 	for (map<char,int>::const_iterator it=mymap.begin(); it!=mymap.end(); it++)
+//     std::cout << it->first << " => " << it->second << '\n';
+// 	std::cout << "General Kenobi\n";
+
+// 	map<char, int>::const_iterator it = mymap.begin();
+// 	map<char, int>::const_iterator ti = mymap.end();
+// 	std::cout << "Wupwup\n";
+
+// 	it++;
+// 	++it;
+// 	it--;
+// 	--it;
+// 	std::cout << "marker1\n";
+
+// 	ti--;
+// 	--ti;
+// 	++ti;
+// 	ti++;
+
+// 	ti = it;
+
+// 	std::cout << "Trump is a kiddo\n";
+// 	map<char, int>::iterator end = mymap.end();
+// 	while(it != end)
+// 	{
+//     	std::cout << it->first << " => " << it->second << '\n';
+// 		it++;
+// 	}
+
+//   return 0;
+// }
 
 ///////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////

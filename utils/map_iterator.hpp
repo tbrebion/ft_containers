@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:43:57 by tbrebion          #+#    #+#             */
-/*   Updated: 2022/12/18 15:36:08 by tbrebion         ###   ########.fr       */
+/*   Updated: 2022/12/20 17:15:07 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #define MAP_ITERATOR_HPP
 
 #include "../vector.hpp"
-#include "avl.hpp"
 
 namespace ft{
 
@@ -29,7 +28,7 @@ namespace ft{
 			typedef typename std::iterator<std::bidirectional_iterator_tag, T>::reference reference;
 			
 			map_iterator() : _ptr(), _tree(), _cmp() {}
-			map_iterator(node *nd, tree *tr) : _ptr(nd), _tree(tr) {}
+			map_iterator(node *nd, const tree *tr) : _ptr(nd), _tree(tr) {}
 			map_iterator(const map_iterator &x) {
 
 				(*this) = x;
@@ -70,10 +69,10 @@ namespace ft{
 				
 				if (_ptr == NULL){
 
-					*this = map_iterator(_tree->findm(_tree->getRoot()), _tree);
+					*this = map_iterator(_tree->findm(_tree->get_root()), _tree);
 					return (*this);
 				}
-				if (_ptr == _tree->findM(_tree->getRoot())){
+				if (_ptr == _tree->findM(_tree->get_root())){
 
 					*this = map_iterator(NULL, _tree);
 					return (*this);
@@ -99,7 +98,7 @@ namespace ft{
 				return (*this);
 			}
 
-			map_iterator	operator++()(int){
+			map_iterator	operator++(int){
 
 				map_iterator	tmp(*this);
 				++(*this);
@@ -112,7 +111,7 @@ namespace ft{
 
 				if (_ptr == NULL){
 
-					_ptr = _tree->findM(_tree->getRoot());
+					_ptr = _tree->findM(_tree->get_root());
 				}
 				else{
 
@@ -138,7 +137,7 @@ namespace ft{
 				return (*this);
 			}
 
-			map_iterator	operator--()(int){
+			map_iterator	operator--(int){
 
 				map_iterator	tmp(*this);
 				--(*this);
