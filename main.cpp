@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 15:01:03 by tbrebion          #+#    #+#             */
-/*   Updated: 2022/12/20 17:26:16 by tbrebion         ###   ########.fr       */
+/*   Updated: 2022/12/27 12:55:39 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "map.hpp"
 #include <map>
 
-#define NAMESPACE ft
+#define NAMESPACE std
 
 using namespace NAMESPACE;
 
@@ -44,22 +44,22 @@ int main ()
   it=mymap.find('b');
   std::cout << "found b\n";
   mymap.erase (it);                   // erasing by iterator
-  std::cout << "erase iterator to b\n";
-  mymap.erase ('c');                  // erasing by key
-  std::cout << "erase by key 'c'\n";
-  it=mymap.find ('e');
-  std::cout << "erase by range 'e' to end\n";
-  mymap.erase ( it, mymap.end() );    // erasing by range
+  // std::cout << "erase iterator to b\n";
+  // mymap.erase ('c');                  // erasing by key
+  // std::cout << "erase by key 'c'\n";
+  // it=mymap.find ('e');
+  // std::cout << "erase by range 'e' to end\n";
+  // mymap.erase ( it, mymap.end() );    // erasing by range
 
   std::cout << " display :\n";
   // show content:
   
-  it=mymap.begin();
-//   std::cout << it->first << std::endl;
-//   for (it=mymap.begin(); it!=mymap.end(); ++it){
+  std::cout << "mymap begin : " << mymap.begin()->first << std::endl;
+  
+  for (it=mymap.begin(); it!=mymap.end(); ++it){
 
-//     std::cout << it->first << " => " << it->second << '\n';
-//   }
+    std::cout << it->first << " => " << it->second << '\n';
+  }
 
   return 0;
 }

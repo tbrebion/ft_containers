@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 13:49:27 by tbrebion          #+#    #+#             */
-/*   Updated: 2022/12/20 17:06:42 by tbrebion         ###   ########.fr       */
+/*   Updated: 2022/12/27 14:47:12 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #define UTILS_HPP
 
 #include "iterator_traits.hpp"
+#include "pair.hpp"
 #include <typeinfo>
 
 namespace ft{
@@ -29,14 +30,14 @@ namespace ft{
 		return (n);
 	}
 
-	template<typename Tp>
-	struct less{
+	// template<typename Tp>
+	// struct less{
 
-		bool	operator()(const Tp &lhs, const Tp &rhs)const{
+	// 	bool	operator()(const Tp &lhs, const Tp &rhs)const{
 
-			return (lhs < rhs);
-		}
-	};
+	// 		return (lhs < rhs);
+	// 	}
+	// };
 
 	template<typename Tp>
 	void	swap(Tp &x, Tp &y){
@@ -52,60 +53,71 @@ namespace ft{
 		return ((x < y) ? y : x);
 	}
 
+
 	template<typename T>
-	class avlNode{
+	struct less : std::binary_function<T, T, bool>{
 
-		public:
-			typedef T	value_type;
-			int			bf;
-			value_type	*data;
-			avlNode<T>	*left;
-			avlNode<T>	*right;
-			avlNode<T>	*parent;
-			int			height;
-			
-			avlNode() : data(NULL), left(NULL), right(NULL), parent(NULL), height(0) 
-			{}
-			avlNode(value_type val) : data(val), left(NULL), right(NULL), parent(NULL), height(0) 
-			{}
-			avlNode(const avlNode &nd) : data(nd.data), left(nd.left), right(nd.right), parent(nd.parent)/* , height(nd.height), bf(nd.bf) */ 
-			{}
-			~avlNode() {}
-			avlNode	&operator=(const avlNode &cp){
+		bool	operator()(const T &x, const T &y)const{
 
-				this->bf = cp.bf;
-				this->data = cp.data;
-				this->left = cp.left;
-				this->right = cp.right;
-				this->parent = cp.parent;
-				this->height = cp.height;
-				
-				return (*this);
-			}
+			return (x < y);
+		}
+	};	
+
+	template<typename Key, typename T>
+	struct BNode{
+
+		ft::pair<Key, T>	pair;
+		BNode				*parent;
+		BNode				*left;
+		BNode				*right;
+		bool				end;
 	};
-	
-	template<typename T>
-	bool	operator==(const avlNode<T> &x, const avlNode<T> &y){
-
-		if (x.data == NULL && y.data == NULL)
-			return (true);
-		return (x.data == y.data);
-	}
-	
-	template<typename T>
-	bool	operator!=(const avlNode<T> &x, const avlNode<T> &y){
-		
-		return (!(x.data == y.data));
-	}
-
-	// template<typename T>
-	// struct less : std::binary_function<T, T, bool>{
-
-	// 	bool	operator()(const T &x, const T &y)const{
-
-	// 		return (x < y);
-	// 	}
-	// };	
 }
 
 #endif
+
+	// template<typename T>
+	// class avlNode{
+
+	// 	public:
+	// 		typedef T	value_type;
+	// 		int			bf;
+	// 		value_type	*data;
+	// 		avlNode<T>	*left;
+	// 		avlNode<T>	*right;
+	// 		avlNode<T>	*parent;
+	// 		int			height;
+			
+	// 		avlNode() : data(NULL), left(NULL), right(NULL), parent(NULL), height(0) 
+	// 		{}
+	// 		avlNode(value_type val) : data(val), left(NULL), right(NULL), parent(NULL), height(0) 
+	// 		{}
+	// 		avlNode(const avlNode &nd) : data(nd.data), left(nd.left), right(nd.right), parent(nd.parent)/* , height(nd.height), bf(nd.bf) */ 
+	// 		{}
+	// 		~avlNode() {}
+	// 		avlNode	&operator=(const avlNode &cp){
+
+	// 			this->bf = cp.bf;
+	// 			this->data = cp.data;
+	// 			this->left = cp.left;
+	// 			this->right = cp.right;
+	// 			this->parent = cp.parent;
+	// 			this->height = cp.height;
+				
+	// 			return (*this);
+	// 		}
+	// };
+	
+	// template<typename T>
+	// bool	operator==(const avlNode<T> &x, const avlNode<T> &y){
+
+	// 	if (x.data == NULL && y.data == NULL)
+	// 		return (true);
+	// 	return (x.data == y.data);
+	// }
+	
+	// template<typename T>
+	// bool	operator!=(const avlNode<T> &x, const avlNode<T> &y){
+		
+	// 	return (!(x.data == y.data));
+	// }
