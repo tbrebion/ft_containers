@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 14:30:23 by tbrebion          #+#    #+#             */
-/*   Updated: 2022/12/27 19:19:34 by tbrebion         ###   ########.fr       */
+/*   Updated: 2022/12/28 18:39:22 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,148 @@ namespace ft{
 				return (0);
 			}
 
+			void	_delete_node(node n){
+
+				node parent = n->parent;
+				if (!n->left && !n->right){
+
+					if (parent->right == n)
+						parent->right = 0;
+					else
+						parent->left = 0;
+					delete n;
+					return;
+				}
+				if (n->right && !n->left){
+
+					if (parent->right == n)
+						parent->right = n->right;
+					else
+						parent->left = n->right;
+					n->right->parent = parent;
+					delete n;
+					return;
+				}
+				if (n->left && !n->right){
+
+					if (parent->right == n)
+						parent->right = n->left;
+					else
+						parent->left = n->left;
+					n->left->parent = parent;
+					delete n;
+					return;
+				}
+				node next = (++iterator(n)).node();
+				if (!next)
+					next = (--iterator(n)).node();
+				ft::swap(next->pair, n->pair);
+				_delete_node(next);
+			}
+
+			void	_init_tree(){
+
+				_root = _new_node(key_type(), mapped_type(), 0);
+				_root->right = _new_node(key_type(), mapped_type(), _root, true);
+				_length = 0;
+			}
+
+			node	_end()const{
+
+				return (_root->right);
+			}
+			
+		public:
+			explicit map(const key_compare &comp = key_compare(), const allocator_type alloc = allocator_type())
+			: _allocator(alloc), _comp(comp){
+
+				_init_tree();
+			}
+
+			template<typename InputIterator>
+			map(InputIterator first, InputIterator last, const key_compare &comp = key_compare(), const allocator_type alloc = allocator_type())
+			: _allocator(alloc), _comp(comp){
+
+				_init_tree();
+				insert(first, last);
+			}
+
+			map(const map<Key, T> &cp){
+
+				_init_tree();
+				(*this) = cp;
+			}
+
+			~map(){
+
+				_free_tree(_root);
+			}
+
+			map	&operator=(const map<Key, T> &x){
+
+				clear();
+				insert(x.begin(), x.end());
+				return (*this);
+			}
+
+			iterator	begin(){
+
+				node n = _root;
+				if (!n->left && !n->right)
+					return (end());
+				if (!n->left && n->right)
+					n = n->right;
+				while (n->left)
+					n = n->left;
+				return (iterator(n));
+			}
+			
+			const_iterator	begin()const{
+
+				node n = _root;
+				if (!n->left && !n->right)
+					return (end());
+				if (!n->left && n->right)
+					n = n->right;
+				while (n->left)
+					n = n->left;
+				return (const_iterator(n));
+			}
+
+			iterator	end(){
+
+				return (iterator(_end()));
+			}
+			
+			const_iterator	end()const{
+
+				return (const_iterator(_end()));
+			}
+
+			reverse_iterator	rbegin(){
+
+				iterator i = end();
+				i--;
+				return (reverse_iterator(i.node()));
+			}
+			
+			const_reverse_iterator	rbegin()const{
+
+				iterator i = end();
+				i--;
+				return (const_reverse_iterator(i.node()));
+			}
+			
+			reverse_iterator	rend(){
+
+				return (reverse_iterator(_root))
+			}
+			
+			const_reverse_iterator	rend()const{
+
+				return (const_reverse_iterator(_root))
+			}
+			
 			
 	};
 }
