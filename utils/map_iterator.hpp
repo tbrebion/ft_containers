@@ -6,14 +6,13 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:43:57 by tbrebion          #+#    #+#             */
-/*   Updated: 2022/12/27 15:33:58 by tbrebion         ###   ########.fr       */
+/*   Updated: 2022/12/29 16:25:36 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MAP_ITERATOR_HPP
 #define MAP_ITERATOR_HPP
 
-// #include "../vector.hpp"
 #include "utils.hpp"
 #include "pair.hpp"
 
@@ -555,7 +554,7 @@ namespace ft{
 				}
 				return (next);
 			}
-	};	
+	};
 }
 
 #endif
