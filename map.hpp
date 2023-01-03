@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 14:30:23 by tbrebion          #+#    #+#             */
-/*   Updated: 2022/12/29 16:08:50 by tbrebion         ###   ########.fr       */
+/*   Updated: 2023/01/03 18:26:40 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ namespace ft{
 			
 			class value_compare{
 
-				friend class map/* <Key, T, Compare, Alloc> */;
+				friend class map;
 				protected:
 					Compare	comp;
 					value_compare(Compare c) : comp(c) {}
@@ -192,7 +192,7 @@ namespace ft{
 
 				return (_root->right);
 			}
-			
+
 		public:
 			explicit map(const key_compare &comp = key_compare(), const allocator_type alloc = allocator_type())
 			: _allocator(alloc), _comp(comp){
@@ -226,18 +226,6 @@ namespace ft{
 				return (*this);
 			}
 
-			iterator	begin(){
-
-				node n = _root;
-				if (!n->left && !n->right)
-					return (end());
-				if (!n->left && n->right)
-					n = n->right;
-				while (n->left)
-					n = n->left;
-				return (iterator(n));
-			}
-			
 			const_iterator	begin()const{
 
 				node n = _root;
@@ -250,16 +238,28 @@ namespace ft{
 				return (const_iterator(n));
 			}
 
-			iterator	end(){
+			iterator	begin(){
 
-				return (iterator(_end()));
+				node n = _root;
+				if (!n->left && !n->right)
+					return (end());
+				if (!n->left && n->right)
+					n = n->right;
+				while (n->left)
+					n = n->left;
+				return (iterator(n));
 			}
 			
 			const_iterator	end()const{
 
 				return (const_iterator(_end()));
 			}
+			
+			iterator	end(){
 
+				return (iterator(_end()));
+			}
+			
 			reverse_iterator	rbegin(){
 
 				iterator i = end();

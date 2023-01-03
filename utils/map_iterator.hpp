@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:43:57 by tbrebion          #+#    #+#             */
-/*   Updated: 2022/12/29 16:25:36 by tbrebion         ###   ########.fr       */
+/*   Updated: 2023/01/03 18:32:17 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -555,6 +555,47 @@ namespace ft{
 				return (next);
 			}
 	};
+
+
+	template<typename K, typename T>
+	const mapIterator<K, T>	operator=(const mapIterator<K, T> &it1){
+	
+		(*this) = it1;
+		return (*this);
+	}
+	
+	template<typename K, typename T>
+	void	operator=(const constMapIterator<K, T> &it1, const mapIterator<K, T> &it2){
+	
+		it1 = it2;
+	}
+
+
+	template<typename K, typename T>
+	bool	operator==(const mapIterator<K, T> &it1, const constMapIterator<K, T> &it2){
+	
+		return (it1 == it2);
+	}
+	
+	template<typename K, typename T>
+	bool	operator==(const constMapIterator<K, T> &it1, const mapIterator<K, T> &it2){
+	
+		return (it1 == it2);
+	}
+
+
+	template<typename K, typename T>
+	bool	operator!=(const mapIterator<K, T> &it1, const constMapIterator<K, T> &it2){
+	
+		return (it1 != it2);
+	}
+	
+	template<typename K, typename T>
+	bool	operator!=(const constMapIterator<K, T> &it1, const mapIterator<K, T> &it2){
+	
+		return (it1 != it2);
+	}
+	
 }
 
 #endif
