@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 14:30:23 by tbrebion          #+#    #+#             */
-/*   Updated: 2023/01/03 18:26:40 by tbrebion         ###   ########.fr       */
+/*   Updated: 2023/01/04 18:36:04 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ namespace ft{
 			class value_compare{
 
 				friend class map;
+				
 				protected:
 					Compare	comp;
 					value_compare(Compare c) : comp(c) {}
@@ -60,16 +61,6 @@ namespace ft{
 			key_compare	_comp;
 			node	_root;
 			size_type	_length;
-			
-			void	_debug_tree(node n){
-
-				if(!n)
-					return;
-				_debug_tree(n->left);
-				if (n->parent && !n->end)
-					std::cout << n->pair.first << "=" << n->pair.second << std::endl;
-				_debug_tree(n->right);
-			}
 			
 			node	_new_node(key_type key, mapped_type value, node parent, bool end = false){
 				
@@ -313,6 +304,7 @@ namespace ft{
 				if ((tmp = find(value.first)) != end())
 					return (ft::make_pair(tmp, false));
 				++_length;
+				// std::cout << "WEWE" << std::endl;
 				return (ft::make_pair(iterator(_insert_node(_root, value.first, value.second)), true));
 			}
 
@@ -483,8 +475,8 @@ namespace ft{
 
 		if (x.size() != y.size())
 			return (false);
-		typename ft::map<Key, T, Compare, Alloc>::const_iterator it = y.begin;
-		typename ft::map<Key, T, Compare, Alloc>::const_iterator it2 = x.begin;
+		typename ft::map<Key, T, Compare, Alloc>::const_iterator it = y.begin();
+		typename ft::map<Key, T, Compare, Alloc>::const_iterator it2 = x.begin();
 		while (it != y.end()){
 
 			if (*it != *it2)
@@ -506,8 +498,8 @@ namespace ft{
 
 		if (x.size() > y.size())
 			return (true);		
-		typename ft::map<Key, T, Compare, Alloc>::const_iterator it = x.begin;
-		typename ft::map<Key, T, Compare, Alloc>::const_iterator it2 = y.begin;
+		typename ft::map<Key, T, Compare, Alloc>::const_iterator it = x.begin();
+		typename ft::map<Key, T, Compare, Alloc>::const_iterator it2 = y.begin();
 		while (it != x.end() && it2 != y.end()){
 
 			if (*it > *it2)

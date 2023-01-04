@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 15:01:03 by tbrebion          #+#    #+#             */
-/*   Updated: 2023/01/03 16:25:49 by tbrebion         ###   ########.fr       */
+/*   Updated: 2023/01/04 18:41:27 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "map.hpp"
 #include <map>
 
-#define NAMESPACE ft
+#define NAMESPACE std
 
 using namespace NAMESPACE;
 
@@ -25,6 +25,57 @@ void	print(map<Key, T>& lst)
 {
 	for (typename map<Key, T>::iterator it = lst.begin(); it != lst.end(); it++)
 		std::cout << it->first << " => " << it->second << '\n';
+}
+// int main ()
+// {
+//   map<char,int> foo,bar;
+//   foo['a']=100;
+//   foo['b']=200;
+//   bar['a']=10;
+//   bar['z']=1000;
+
+//   // foo ({{a,100},{b,200}}) vs bar ({a,10},{z,1000}}):
+//   if (foo==bar) std::cout << "foo and bar are equal\n";
+//   if (foo!=bar) std::cout << "foo and bar are not equal\n";
+//   if (foo< bar) std::cout << "foo is less than bar\n";
+//   if (foo> bar) std::cout << "foo is greater than bar\n";
+//   if (foo<=bar) std::cout << "foo is less than or equal to bar\n";
+//   if (foo>=bar) std::cout << "foo is greater than or equal to bar\n";
+
+//   return 0;
+// }
+
+
+int main()
+{
+	pair<int, std::string>			my_pair(8, "salut");
+	map<int, std::string>			test;
+	map<int, std::string>::iterator	it;
+
+	test.insert(my_pair);
+	test.insert(pair<int, std::string>(-4, "bar"));
+	test.insert(pair<int, std::string>(2, "machin"));
+	test.insert(pair<int, std::string>(3, "foo"));
+	test.insert(pair<int, std::string>(746, "Marcel"));
+	test.insert(pair<int, std::string>(1, "truc"));
+	it = test.begin();
+	std::cout << '\n';
+
+	std::cout << "ICI	" << test.end()->first << std::endl;				
+	while (it != test.end())
+	{
+		// std::cout << "start of while\n";
+		std::cout << it->first << ", " << it->second << '\n';
+		it++;
+// 		std::cout << "iterator incremented\n";
+
+// #ifndef STD
+// 		std::cout << it.getPointer() << '\n';
+// 		std::cout << test.end().getPointer() << '\n';
+// #endif
+
+	}
+	std::cout << "End of display loop\n";
 }
 
 // int main ()
@@ -134,56 +185,50 @@ void	print(map<Key, T>& lst)
 // 	std::cout << tmp3->first << " => " << tmp3->second << '\n';
 // }
 
-int main ()
-{
-  map<char,int> mymap;
 
 
-	if (mymap.begin() != mymap.end())
-		std::cout << "This should not happen\n";
+// int main ()
+// {
+//   map<char,int> mymap;
 
-  mymap['b'] = 100;
-  mymap['a'] = 200;
-  mymap['c'] = 300;
+//   mymap['x'] = 100;
+//   mymap['y'] = 200;
+//   mymap['z'] = 300;
 
-	if (mymap.begin() == mymap.end())
-		std::cout << "This is wrong\n";
-  // show content:
-  for (map<char,int>::iterator it=mymap.begin(); it!=mymap.end(); it++)
-    std::cout << it->first << " => " << it->second << '\n';
+//   // show content:
+//   map<char,int>::reverse_iterator rit;
+//   for (rit=mymap.rbegin(); rit!=mymap.rend(); ++rit)
+//     std::cout << rit->first << " => " << rit->second << '\n';
 
-	std::cout << "Hello there\n";
-	for (map<char,int>::const_iterator it=mymap.begin(); it!=mymap.end(); it++)
-    std::cout << it->first << " => " << it->second << '\n';
-	std::cout << "General Kenobi\n";
 
-	map<char, int>::const_iterator it = mymap.begin();
-	map<char, int>::const_iterator ti = mymap.end();
-	std::cout << "Wupwup\n";
+// 	for (map<char,int>::const_reverse_iterator it=mymap.rbegin(); it!=mymap.rend(); it++)
+//     std::cout << it->first << " => " << it->second << '\n';
 
-	it++;
-	++it;
-	it--;
-	--it;
-	std::cout << "marker1\n";
+// 	map<char, int>::const_reverse_iterator it = mymap.rbegin();
+// 	map<char, int>::const_reverse_iterator ti = mymap.rend();
 
-	ti--;
-	--ti;
-	++ti;
-	ti++;
+// 	it++;
+// 	++it;
+// 	it--;
+// 	--it;
 
-	ti = it;
+// 	ti--;
+// 	--ti;
+// 	++ti;
+// 	ti++;
 
-	std::cout << "Trump is a kiddo\n";
-	map<char, int>::iterator end = mymap.end();
-	while(it != end)
-	{
-    	std::cout << it->first << " => " << it->second << '\n';
-		it++;
-	}
+// 	ti = it;
 
-  return 0;
-}
+// 	map<char, int>::reverse_iterator end = mymap.rend();
+// 	while(it != end)
+// 	{
+//     	std::cout << it->first << " => " << it->second << '\n';
+// 		it++;
+// 	}
+
+
+//   return 0;
+// }
 
 
 

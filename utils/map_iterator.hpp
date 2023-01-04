@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:43:57 by tbrebion          #+#    #+#             */
-/*   Updated: 2023/01/03 18:32:17 by tbrebion         ###   ########.fr       */
+/*   Updated: 2023/01/04 17:26:04 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,11 @@ namespace ft{
 				return (tmp);
 			}
 
+			const pointer	&getPtr()const{
+
+				return (_ptr);	//////////////////////////////////////////////////////
+			}
+
 		protected:
 			pointer	_ptr;
 			
@@ -167,11 +172,25 @@ namespace ft{
 
 				(*this) = cp;
 			}
+
+			/////////////////////////////////////////
+			constMapIterator(const mapIterator<K, T> &cp) {
+
+				(*this) = cp;											/////////////////////////////////////
+			}
+			/////////////////////////////////////////
 			constMapIterator	&operator=(const constMapIterator &x){
 
 				this->_ptr = x._ptr;
 				return (*this);
 			}
+			/////////////////////////////////////////
+			constMapIterator	&operator=(const mapIterator<K, T> &x){
+
+				this->_ptr = x.getPtr();										////////////////////////////////////
+				return (*this);
+			}
+			/////////////////////////////////////////
 			pointer	node(){
 
 				return (_ptr);
@@ -286,7 +305,7 @@ namespace ft{
 			}
 	};
 
-////////////////////////////////////////////////////////////////////////////////
+// ////////////////////////////////////////////////////////////////////////////////
 
 	template<typename K, typename T>
 	class reverseMapIterator{
@@ -378,6 +397,11 @@ namespace ft{
 				return (tmp);
 			}
 
+			const pointer	&getPtr()const{
+
+				return (_ptr);	//////////////////////////////////////////////////////
+			}
+
 		protected:
 			pointer	_ptr;
 			
@@ -437,11 +461,26 @@ namespace ft{
 
 				(*this) = cp;
 			}
+			/////////////////////////////////////////
+			constReverseMapIterator(const reverseMapIterator<K, T> &cp) {
+
+				(*this) = cp;											/////////////////////////////////////
+			}
+			/////////////////////////////////////////
+
 			constReverseMapIterator	&operator=(const constReverseMapIterator &x){
 
 				this->_ptr = x._ptr;
 				return (*this);
 			}
+			/////////////////////////////////////////
+			constReverseMapIterator	&operator=(const reverseMapIterator<K, T> &x){
+
+				this->_ptr = x.getPtr();										////////////////////////////////////
+				return (*this);
+			}
+			/////////////////////////////////////////
+			
 			pointer	node(){
 
 				return (_ptr);
@@ -556,46 +595,55 @@ namespace ft{
 			}
 	};
 
-
-	template<typename K, typename T>
-	const mapIterator<K, T>	operator=(const mapIterator<K, T> &it1){
+	// template<typename K, typename T>
+	// bool	operator==(const mapIterator<K, T> &it1, const constMapIterator<K, T> &it2){
 	
-		(*this) = it1;
-		return (*this);
-	}
+	// 	return (it1 == it2);
+	// }
 	
-	template<typename K, typename T>
-	void	operator=(const constMapIterator<K, T> &it1, const mapIterator<K, T> &it2){
+	// template<typename K, typename T>
+	// bool	operator==(const constMapIterator<K, T> &it1, const mapIterator<K, T> &it2){
 	
-		it1 = it2;
-	}
+	// 	return (it1 == it2);
+	// }
 
 
-	template<typename K, typename T>
-	bool	operator==(const mapIterator<K, T> &it1, const constMapIterator<K, T> &it2){
+	// template<typename K, typename T>
+	// bool	operator!=(const mapIterator<K, T> &it1, const constMapIterator<K, T> &it2){
 	
-		return (it1 == it2);
-	}
+	// 	return (it1 != it2);
+	// }
 	
-	template<typename K, typename T>
-	bool	operator==(const constMapIterator<K, T> &it1, const mapIterator<K, T> &it2){
+	// template<typename K, typename T>
+	// bool	operator!=(const constMapIterator<K, T> &it1, const mapIterator<K, T> &it2){
 	
-		return (it1 == it2);
-	}
+	// 	return (it1 != it2);
+	// }
+
+	// template<typename K, typename T>
+	// bool	operator==(const reverseMapIterator<K, T> &it1, const constReverseMapIterator<K, T> &it2){
+	
+	// 	return (it1 == it2);
+	// }
+	
+	// template<typename K, typename T>
+	// bool	operator==(const constReverseMapIterator<K, T> &it1, const reverseMapIterator<K, T> &it2){
+	
+	// 	return (it1 == it2);
+	// }
 
 
-	template<typename K, typename T>
-	bool	operator!=(const mapIterator<K, T> &it1, const constMapIterator<K, T> &it2){
+	// template<typename K, typename T>
+	// bool	operator!=(const reverseMapIterator<K, T> &it1, const constReverseMapIterator<K, T> &it2){
 	
-		return (it1 != it2);
-	}
+	// 	return (it1 != it2);
+	// }
 	
-	template<typename K, typename T>
-	bool	operator!=(const constMapIterator<K, T> &it1, const mapIterator<K, T> &it2){
+	// template<typename K, typename T>
+	// bool	operator!=(const constReverseMapIterator<K, T> &it1, const reverseMapIterator<K, T> &it2){
 	
-		return (it1 != it2);
-	}
-	
+	// 	return (it1 != it2);
+	// }
 }
 
 #endif
