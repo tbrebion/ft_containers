@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 15:01:03 by tbrebion          #+#    #+#             */
-/*   Updated: 2023/01/04 18:41:27 by tbrebion         ###   ########.fr       */
+/*   Updated: 2023/01/05 13:43:12 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "map.hpp"
 #include <map>
 
-#define NAMESPACE std
+#define NAMESPACE ft
 
 using namespace NAMESPACE;
 
@@ -54,14 +54,13 @@ int main()
 
 	test.insert(my_pair);
 	test.insert(pair<int, std::string>(-4, "bar"));
-	test.insert(pair<int, std::string>(2, "machin"));
-	test.insert(pair<int, std::string>(3, "foo"));
-	test.insert(pair<int, std::string>(746, "Marcel"));
-	test.insert(pair<int, std::string>(1, "truc"));
+	// test.insert(pair<int, std::string>(2, "machin"));
+	// test.insert(pair<int, std::string>(3, "foo"));
+	// test.insert(pair<int, std::string>(746, "Marcel"));
+	// test.insert(pair<int, std::string>(1, "truc"));
 	it = test.begin();
 	std::cout << '\n';
 
-	std::cout << "ICI	" << test.end()->first << std::endl;				
 	while (it != test.end())
 	{
 		// std::cout << "start of while\n";

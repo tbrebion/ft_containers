@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:43:57 by tbrebion          #+#    #+#             */
-/*   Updated: 2023/01/04 17:26:04 by tbrebion         ###   ########.fr       */
+/*   Updated: 2023/01/05 14:22:57 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,25 +172,20 @@ namespace ft{
 
 				(*this) = cp;
 			}
-
-			/////////////////////////////////////////
 			constMapIterator(const mapIterator<K, T> &cp) {
 
-				(*this) = cp;											/////////////////////////////////////
+				(*this) = cp;
 			}
-			/////////////////////////////////////////
 			constMapIterator	&operator=(const constMapIterator &x){
 
 				this->_ptr = x._ptr;
 				return (*this);
 			}
-			/////////////////////////////////////////
 			constMapIterator	&operator=(const mapIterator<K, T> &x){
 
-				this->_ptr = x.getPtr();										////////////////////////////////////
+				this->_ptr = x.getPtr();
 				return (*this);
 			}
-			/////////////////////////////////////////
 			pointer	node(){
 
 				return (_ptr);
@@ -399,7 +394,7 @@ namespace ft{
 
 			const pointer	&getPtr()const{
 
-				return (_ptr);	//////////////////////////////////////////////////////
+				return (_ptr);
 			}
 
 		protected:
@@ -461,26 +456,21 @@ namespace ft{
 
 				(*this) = cp;
 			}
-			/////////////////////////////////////////
 			constReverseMapIterator(const reverseMapIterator<K, T> &cp) {
 
-				(*this) = cp;											/////////////////////////////////////
+				(*this) = cp;
 			}
-			/////////////////////////////////////////
 
 			constReverseMapIterator	&operator=(const constReverseMapIterator &x){
 
 				this->_ptr = x._ptr;
 				return (*this);
 			}
-			/////////////////////////////////////////
 			constReverseMapIterator	&operator=(const reverseMapIterator<K, T> &x){
 
-				this->_ptr = x.getPtr();										////////////////////////////////////
+				this->_ptr = x.getPtr();
 				return (*this);
-			}
-			/////////////////////////////////////////
-			
+			}			
 			pointer	node(){
 
 				return (_ptr);

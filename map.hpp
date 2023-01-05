@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 14:30:23 by tbrebion          #+#    #+#             */
-/*   Updated: 2023/01/04 18:36:04 by tbrebion         ###   ########.fr       */
+/*   Updated: 2023/01/05 17:37:55 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ namespace ft{
 			typedef const T	&const_reference;
 			typedef T	*pointer;
 			typedef const T	*const_pointer;
-			typedef unsigned long	size_type;
+			typedef /* unsigned long */size_t	size_type;
 			typedef BNode<key_type, mapped_type>	*node;
 			typedef mapIterator<key_type, mapped_type>	iterator;
 			typedef reverseMapIterator<key_type, mapped_type>	reverse_iterator;
@@ -287,7 +287,9 @@ namespace ft{
 
 			size_type	max_size()const{
 
-				return (std::numeric_limits<size_type>::max() / (sizeof(ft::BNode<key_type, mapped_type>)));				
+				return (std::numeric_limits<size_type>::max() / (sizeof(value_type)));
+				// return (std::numeric_limits<size_type>::max() / (sizeof(value_type)));				
+				// return (_allocator.max_size());
 			}
 
 			mapped_type	&operator[](const key_type &k){
@@ -304,7 +306,6 @@ namespace ft{
 				if ((tmp = find(value.first)) != end())
 					return (ft::make_pair(tmp, false));
 				++_length;
-				// std::cout << "WEWE" << std::endl;
 				return (ft::make_pair(iterator(_insert_node(_root, value.first, value.second)), true));
 			}
 
