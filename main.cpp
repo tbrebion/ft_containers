@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 15:01:03 by tbrebion          #+#    #+#             */
-/*   Updated: 2023/01/05 13:43:12 by tbrebion         ###   ########.fr       */
+/*   Updated: 2023/01/06 16:52:50 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,34 +26,17 @@ void	print(map<Key, T>& lst)
 	for (typename map<Key, T>::iterator it = lst.begin(); it != lst.end(); it++)
 		std::cout << it->first << " => " << it->second << '\n';
 }
-// int main ()
-// {
-//   map<char,int> foo,bar;
-//   foo['a']=100;
-//   foo['b']=200;
-//   bar['a']=10;
-//   bar['z']=1000;
-
-//   // foo ({{a,100},{b,200}}) vs bar ({a,10},{z,1000}}):
-//   if (foo==bar) std::cout << "foo and bar are equal\n";
-//   if (foo!=bar) std::cout << "foo and bar are not equal\n";
-//   if (foo< bar) std::cout << "foo is less than bar\n";
-//   if (foo> bar) std::cout << "foo is greater than bar\n";
-//   if (foo<=bar) std::cout << "foo is less than or equal to bar\n";
-//   if (foo>=bar) std::cout << "foo is greater than or equal to bar\n";
-
-//   return 0;
-// }
 
 
 int main()
 {
-	pair<int, std::string>			my_pair(8, "salut");
+	// pair<int, std::string>			my_pair(8, "salut");
 	map<int, std::string>			test;
 	map<int, std::string>::iterator	it;
 
-	test.insert(my_pair);
+	// test.insert(my_pair);
 	test.insert(pair<int, std::string>(-4, "bar"));
+	// std::cout << "WEWEWEWE  " << "[" << test[0] << "]" << std::endl << std::endl; ////PB on iterator
 	// test.insert(pair<int, std::string>(2, "machin"));
 	// test.insert(pair<int, std::string>(3, "foo"));
 	// test.insert(pair<int, std::string>(746, "Marcel"));
@@ -76,6 +59,25 @@ int main()
 	}
 	std::cout << "End of display loop\n";
 }
+
+// int main ()
+// {
+//   map<char,int> foo,bar;
+//   foo['a']=100;
+//   foo['b']=200;
+//   bar['a']=10;
+//   bar['z']=1000;
+
+//   // foo ({{a,100},{b,200}}) vs bar ({a,10},{z,1000}}):
+//   if (foo==bar) std::cout << "foo and bar are equal\n";
+//   if (foo!=bar) std::cout << "foo and bar are not equal\n";
+//   if (foo< bar) std::cout << "foo is less than bar\n";
+//   if (foo> bar) std::cout << "foo is greater than bar\n";
+//   if (foo<=bar) std::cout << "foo is less than or equal to bar\n";
+//   if (foo>=bar) std::cout << "foo is greater than or equal to bar\n";
+
+//   return 0;
+// }
 
 // int main ()
 // {

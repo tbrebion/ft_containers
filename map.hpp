@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 14:30:23 by tbrebion          #+#    #+#             */
-/*   Updated: 2023/01/05 17:37:55 by tbrebion         ###   ########.fr       */
+/*   Updated: 2023/01/06 14:59:38 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ namespace ft{
 			node	_find(node n, key_type key)const{
 
 				node	tmp;
+				
 				if (!n->end && n->pair.first == key && n->parent)
 					return (n);
 				if (n->right){
@@ -288,7 +289,6 @@ namespace ft{
 			size_type	max_size()const{
 
 				return (std::numeric_limits<size_type>::max() / (sizeof(value_type)));
-				// return (std::numeric_limits<size_type>::max() / (sizeof(value_type)));				
 				// return (_allocator.max_size());
 			}
 
@@ -385,7 +385,7 @@ namespace ft{
 			
 			const_iterator	find(const key_type &k)const{
 
-				if (empty())
+				if (empty())					
 					return (end());
 				node tmp = _find(_root, k);
 				if (tmp)

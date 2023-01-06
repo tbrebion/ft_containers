@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 13:49:27 by tbrebion          #+#    #+#             */
-/*   Updated: 2022/12/27 14:47:12 by tbrebion         ###   ########.fr       */
+/*   Updated: 2023/01/06 14:21:50 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,6 @@ namespace ft{
 		}
 		return (n);
 	}
-
-	// template<typename Tp>
-	// struct less{
-
-	// 	bool	operator()(const Tp &lhs, const Tp &rhs)const{
-
-	// 		return (lhs < rhs);
-	// 	}
-	// };
 
 	template<typename Tp>
 	void	swap(Tp &x, Tp &y){
