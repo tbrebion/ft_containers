@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 15:01:03 by tbrebion          #+#    #+#             */
-/*   Updated: 2023/01/06 16:52:50 by tbrebion         ###   ########.fr       */
+/*   Updated: 2023/01/07 14:13:52 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,32 +30,23 @@ void	print(map<Key, T>& lst)
 
 int main()
 {
-	// pair<int, std::string>			my_pair(8, "salut");
+	pair<int, std::string>			my_pair(8, "salut");
 	map<int, std::string>			test;
 	map<int, std::string>::iterator	it;
 
-	// test.insert(my_pair);
+	test.insert(my_pair);
 	test.insert(pair<int, std::string>(-4, "bar"));
-	// std::cout << "WEWEWEWE  " << "[" << test[0] << "]" << std::endl << std::endl; ////PB on iterator
-	// test.insert(pair<int, std::string>(2, "machin"));
-	// test.insert(pair<int, std::string>(3, "foo"));
-	// test.insert(pair<int, std::string>(746, "Marcel"));
-	// test.insert(pair<int, std::string>(1, "truc"));
+	test.insert(pair<int, std::string>(2, "machin"));
+	test.insert(pair<int, std::string>(3, "foo"));
+	test.insert(pair<int, std::string>(746, "Marcel"));
+	test.insert(pair<int, std::string>(1, "truc"));
 	it = test.begin();
 	std::cout << '\n';
 
 	while (it != test.end())
 	{
-		// std::cout << "start of while\n";
 		std::cout << it->first << ", " << it->second << '\n';
 		it++;
-// 		std::cout << "iterator incremented\n";
-
-// #ifndef STD
-// 		std::cout << it.getPointer() << '\n';
-// 		std::cout << test.end().getPointer() << '\n';
-// #endif
-
 	}
 	std::cout << "End of display loop\n";
 }
