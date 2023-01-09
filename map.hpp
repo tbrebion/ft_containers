@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 14:30:23 by tbrebion          #+#    #+#             */
-/*   Updated: 2023/01/09 17:34:56 by tbrebion         ###   ########.fr       */
+/*   Updated: 2023/01/09 19:00:03 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,7 +175,7 @@ namespace ft{
 
 			void	_init_tree(){
 
-				_root = _new_node(key_type(), mapped_type(), 0); // Pb is here !!!!!!!!!!!!
+				_root = _new_node(key_type(), mapped_type(), 0);
 				_root->right = _new_node(key_type(), mapped_type(), _root, true);
 				_length = 0;
 			}
