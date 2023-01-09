@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 14:30:23 by tbrebion          #+#    #+#             */
-/*   Updated: 2023/01/07 14:37:00 by tbrebion         ###   ########.fr       */
+/*   Updated: 2023/01/09 15:27:54 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -288,7 +288,7 @@ namespace ft{
 
 			size_type	max_size()const{
 
-				return (std::numeric_limits<size_type>::max() / (sizeof(value_type)));
+				return ((std::numeric_limits<size_type>::max() / (sizeof(value_type))) - sizeof(value_type));
 				// return (_allocator.max_size());
 			}
 
@@ -305,8 +305,8 @@ namespace ft{
 				iterator tmp;
 				if ((tmp = find(value.first)) != end())
 					return (ft::make_pair(tmp, false));
-				++_length;
-				return (ft::make_pair(iterator(_insert_node(_root, value.first, value.second)), true));
+				++_length;				
+				return (ft::make_pair(iterator(_insert_node(_root->right, value.first, value.second)), true)); //_root??
 			}
 
 			iterator	insert(iterator position, const value_type &value){
