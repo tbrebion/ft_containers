@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 14:30:23 by tbrebion          #+#    #+#             */
-/*   Updated: 2023/01/09 19:00:03 by tbrebion         ###   ########.fr       */
+/*   Updated: 2023/01/10 20:03:07 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ namespace ft{
 			typedef const T	&const_reference;
 			typedef T	*pointer;
 			typedef const T	*const_pointer;
-			typedef /* unsigned long */size_t	size_type;
+			typedef size_t	size_type;
 			typedef BNode<key_type, mapped_type>	*node;
 			typedef mapIterator<key_type, mapped_type>	iterator;
 			typedef reverseMapIterator<key_type, mapped_type>	reverse_iterator;
