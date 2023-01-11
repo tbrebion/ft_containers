@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:43:57 by tbrebion          #+#    #+#             */
-/*   Updated: 2023/01/09 17:24:25 by tbrebion         ###   ########.fr       */
+/*   Updated: 2023/01/11 16:23:03 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,17 @@ namespace ft{
 				this->_ptr = x._ptr;
 				return (*this);
 			}
-			pointer	node(){
+			pointer	node()const{
 
 				return (_ptr);
 			}
 
-			value_type	&operator*(){
+			value_type	&operator*()const{
 
 				return (_ptr->pair);
 			}
 
-			value_type	*operator->(){
+			value_type	*operator->()const{
 
 				return (&_ptr->pair);
 			}
@@ -112,7 +112,10 @@ namespace ft{
 
 				return (_ptr);
 			}
+			const pointer	&base()const{
 
+				return (_ptr);
+			}
 		protected:
 			pointer	_ptr;
 			
@@ -186,7 +189,7 @@ namespace ft{
 				this->_ptr = x.getPtr();
 				return (*this);
 			}
-			pointer	node(){
+			pointer	node()const{
 
 				return (_ptr);
 			}
@@ -262,6 +265,11 @@ namespace ft{
 				return (_ptr);
 			}
 
+			const pointer	&base()const{
+
+				return (_ptr);
+			}
+
 		protected:
 			pointer	_ptr;
 			
@@ -325,6 +333,10 @@ namespace ft{
 
 				(*this) = cp;
 			}
+			reverseMapIterator(const constMapIterator<K, T> &cp) {
+
+				(*this) = cp;
+			}
 			reverseMapIterator	&operator=(const reverseMapIterator &x){
 
 				this->_ptr = x._ptr;
@@ -335,17 +347,22 @@ namespace ft{
 				this->_ptr = x.getPtr();
 				return (*this);
 			}
-			pointer	node(){
+			reverseMapIterator	&operator=(const constMapIterator<K, T> &x){
+
+				this->_ptr = x.getPtr();
+				return (*this);
+			}
+			pointer	node()const{
 
 				return (_ptr);
 			}
 
-			value_type	&operator*(){
+			value_type	&operator*()const{
 
 				return (_ptr->pair);
 			}
 
-			value_type	*operator->(){
+			value_type	*operator->()const{
 
 				return (&_ptr->pair);
 			}
@@ -407,6 +424,11 @@ namespace ft{
 			}
 
 			const pointer	&getPtr()const{
+
+				return (_ptr);
+			}
+			
+			const pointer	&base()const{
 
 				return (_ptr);
 			}
@@ -504,7 +526,7 @@ namespace ft{
 				return (*this);
 			}
 			
-			pointer	node(){
+			pointer	node()const{
 
 				return (_ptr);
 			}
@@ -576,6 +598,11 @@ namespace ft{
 			}
 			
 			const pointer	&getPtr()const{
+
+				return (_ptr);
+			}
+
+			const pointer	&base()const{
 
 				return (_ptr);
 			}
