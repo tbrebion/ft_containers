@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:32:56 by tbrebion          #+#    #+#             */
-/*   Updated: 2023/01/11 16:09:15 by tbrebion         ###   ########.fr       */
+/*   Updated: 2023/01/12 14:46:16 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,17 @@ int		main(void)
 	std::cout << (it_ == dec(it, 3).base()) << std::endl;
 
 	printPair(it.base());
-	printPair(inc(it.base(), 1));
+	// printPair(inc(it.base(), 1));
 
 	std::cout << "TEST OFFSET" << std::endl;
 	--it;
-	printPair(it);
-	printPair(it.base());
+	// printPair(it);
+	// printPair(it.base());
 
 	it = mp.rbegin(); ite = mp.rend();
 	while (it != ite)
 		std::cout << "[rev] " << printPair(it++, false) << std::endl;
-	printReverse(mp);
+	// printReverse(mp);
 
 	return (0);
 }

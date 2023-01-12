@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 13:49:27 by tbrebion          #+#    #+#             */
-/*   Updated: 2023/01/11 15:07:06 by tbrebion         ###   ########.fr       */
+/*   Updated: 2023/01/12 14:42:38 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ namespace ft{
 		BNode				*right;
 		bool				end;
 	};
+
 }
 
 #endif
