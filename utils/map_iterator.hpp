@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:43:57 by tbrebion          #+#    #+#             */
-/*   Updated: 2023/01/12 14:48:03 by tbrebion         ###   ########.fr       */
+/*   Updated: 2023/01/13 18:55:38 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ namespace ft{
 			typedef ft::pair<K, T> &reference;
 			typedef BNode<K, T> *pointer;
 
-			mapIterator() : _ptr(0) {}
+			mapIterator() : _ptr(0){}
 			mapIterator(const pointer &p) : _ptr(p) {}
 			mapIterator(const mapIterator &cp) {
 
@@ -81,7 +81,7 @@ namespace ft{
 
 				return (_ptr <= x._ptr);
 			}
-
+			
 			mapIterator	&operator++(){
 
 				_ptr = successor(_ptr);
@@ -112,13 +112,14 @@ namespace ft{
 
 				return (_ptr);
 			}
-			const pointer	&base()const{
+			
+			const mapIterator	base()const{
 
-				return (_ptr);
+				return (mapIterator(_ptr));
 			}
+
 		protected:
 			pointer	_ptr;
-			
 		private:
 			pointer	successor(pointer ptr){
 
@@ -265,9 +266,9 @@ namespace ft{
 				return (_ptr);
 			}
 
-			const pointer	&base()const{
+			const constMapIterator	base()const{
 
-				return (_ptr);
+				return (constMapIterator(_ptr));
 			}
 
 		protected:
@@ -428,9 +429,9 @@ namespace ft{
 				return (_ptr);
 			}
 			
-			const pointer	&base()const{
+			const reverseMapIterator	base()const{
 
-				return (_ptr);
+				return (reverseMapIterator(_ptr));
 			}
 
 		protected:
@@ -602,9 +603,9 @@ namespace ft{
 				return (_ptr);
 			}
 
-			const pointer	&base()const{
+			const constReverseMapIterator	base()const{
 
-				return (_ptr);
+				return (constReverseMapIterator(_ptr));
 			}
 
 		protected:
@@ -649,6 +650,42 @@ namespace ft{
 				return (next);
 			}
 	};
+
+	// template<typename Iter1, typename Iter2>
+	// bool	operator==(const Iter1 &x, const Iter2 &y){
+
+	// 	return (x.getPtr() == y.getPtr());
+	// }
+	
+	// template<typename Iter1, typename Iter2>	
+	// bool	operator!=(const Iter1 &x, const Iter2 &y){
+
+	// 	return (!(x == y));
+	// }
+	
+	// template<typename Iter1, typename Iter2>	
+	// bool	operator<(const Iter1 &x, const Iter2 &y){
+
+	// 	return (x.getPtr() < y.getPtr());
+	// }
+	
+	// template<typename Iter1, typename Iter2>	
+	// bool	operator<=(const Iter1 &x, const Iter2 &y){
+
+	// 	return (x.getPtr() <= y.getPtr());
+	// }
+	
+	// template<typename Iter1, typename Iter2>	
+	// bool	operator>(const Iter1 &x, const Iter2 &y){
+
+	// 	return (x.getPtr() > y.getPtr());
+	// }
+	
+	// template<typename Iter1, typename Iter2>	
+	// bool	operator>=(const Iter1 &x, const Iter2 &y){
+
+	// 	return (x.getPtr() >= y.getPtr());
+	// }
 }
 
 #endif

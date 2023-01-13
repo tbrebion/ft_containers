@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 14:30:23 by tbrebion          #+#    #+#             */
-/*   Updated: 2023/01/10 20:03:07 by tbrebion         ###   ########.fr       */
+/*   Updated: 2023/01/13 18:35:10 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -527,7 +527,7 @@ namespace ft{
 	bool	operator<=(const ft::map<Key, T, Compare, Alloc> &x, const ft::map<Key, T, Compare, Alloc> &y){
 
 		return (!(x > y));
-	}
+	}	
 }
 
 #endif
