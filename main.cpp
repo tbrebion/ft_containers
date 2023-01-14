@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 15:01:03 by tbrebion          #+#    #+#             */
-/*   Updated: 2023/01/11 14:31:33 by tbrebion         ###   ########.fr       */
+/*   Updated: 2023/01/14 21:53:34 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include <list>
 #include "utils/pair.hpp"
 
-#define NAMESPACE ft
+#define NAMESPACE std
 
 using namespace NAMESPACE;
 
@@ -29,35 +29,35 @@ void	print(map<Key, T>& lst)
 		std::cout << it->first << " => " << it->second << '\n';
 }
 
-// int main()
-// {
-// 	pair<int, std::string>			my_pair(8, "salut");
-// 	map<int, std::string>			test;
-// 	map<int, std::string>			test2;
-// 	map<int, std::string>::iterator	it;
+int main()
+{
+	pair<int, std::string>			my_pair(8, "salut");
+	map<int, std::string>			test;
+	map<int, std::string>			test2;
+	map<int, std::string>::iterator	it;
 
-// 	test.insert(my_pair);
-// 	test.insert(pair<int, std::string>(-4, "bar"));
-// 	test.insert(pair<int, std::string>(0, "MYTEST"));
-// 	test.insert(pair<int, std::string>(2, "machin"));
-// 	test.insert(pair<int, std::string>(3, "foo"));
-// 	test.insert(pair<int, std::string>(746, "Marcel"));
-// 	test.insert(pair<int, std::string>(1, "truc"));
-// 	test.insert(test.end(), pair<int, std::string>(12, "NEWWWWWWWWWWWWWWW"));
-// 	test2.insert(test.begin(), test.end());
-// 	it = test.begin();
+	test.insert(my_pair);
+	test.insert(pair<int, std::string>(-4, "bar"));
+	test.insert(pair<int, std::string>(0, "MYTEST"));
+	test.insert(pair<int, std::string>(2, "machin"));
+	test.insert(pair<int, std::string>(3, "foo"));
+	test.insert(pair<int, std::string>(746, "Marcel"));
+	test.insert(pair<int, std::string>(1, "truc"));
+	test.insert(test.end(), pair<int, std::string>(12, "NEWWWWWWWWWWWWWWW"));
+	test2.insert(test.begin(), test.end());
+	it = test.begin();
 	
-// 	std::cout << '\n';
+	std::cout << '\n';
 	
-// 	while (it != test.end())
-// 	{
-// 		std::cout << it->first << ", " << it->second << '\n';
-// 		it++;
-// 	}
-// 	std::cout << "End of display loop\n";
+	while (it != test.end())
+	{
+		std::cout << it->first << ", " << it->second << '\n';
+		it++;
+	}
+	std::cout << "End of display loop\n";
 	
-// 	return (0);
-// }
+	return (0);
+}
 
 // int main ()
 // {
