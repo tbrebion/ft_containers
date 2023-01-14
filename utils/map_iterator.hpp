@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:43:57 by tbrebion          #+#    #+#             */
-/*   Updated: 2023/01/13 18:55:38 by tbrebion         ###   ########.fr       */
+/*   Updated: 2023/01/14 20:09:02 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,18 @@ namespace ft{
 
 				return (_ptr == x._ptr);
 			}
+			template<typename Iter>
+			bool	operator==(const Iter &x){
+
+				return (_ptr == x.getPtr());
+			}
 
 			bool	operator!=(const mapIterator<K, T> &x){
+
+				return (!(*this == x));
+			}
+			template<typename Iter>
+			bool	operator!=(const Iter &x){
 
 				return (!(*this == x));
 			}
@@ -66,20 +76,40 @@ namespace ft{
 
 				return (_ptr > x._ptr);
 			}
+			template<typename Iter>
+			bool	operator>(const Iter &x){
+
+				return (_ptr > x.getPtr());
+			}
 
 			bool	operator<(const mapIterator<K, T> &x){
 
 				return (_ptr < x._ptr);
+			}
+			template<typename Iter>
+			bool	operator<(const Iter &x){
+
+				return (_ptr < x.getPtr());
 			}
 
 			bool	operator>=(const mapIterator<K, T> &x){
 
 				return (_ptr >= x._ptr);
 			}
+			template<typename Iter>
+			bool	operator>=(const Iter &x){
+
+				return (_ptr >= x.getPtr());
+			}
 
 			bool	operator<=(const mapIterator<K, T> &x){
 
 				return (_ptr <= x._ptr);
+			}
+			template<typename Iter>
+			bool	operator<=(const Iter &x){
+
+				return (_ptr <= x.getPtr());
 			}
 			
 			mapIterator	&operator++(){
@@ -176,16 +206,18 @@ namespace ft{
 
 				(*this) = cp;
 			}
-			constMapIterator(const mapIterator<K, T> &cp) {
+			template<typename Iter>
+			constMapIterator(const Iter &cp){
 
-				(*this) = cp;
+				(*this = cp);
 			}
 			constMapIterator	&operator=(const constMapIterator &x){
 
 				this->_ptr = x._ptr;
 				return (*this);
 			}
-			constMapIterator	&operator=(const mapIterator<K, T> &x){
+			template<typename Iter>
+			constMapIterator	&operator=(const Iter &x){
 
 				this->_ptr = x.getPtr();
 				return (*this);
@@ -209,8 +241,18 @@ namespace ft{
 
 				return (_ptr == x._ptr);
 			}
+			template<typename Iter>
+			bool	operator==(const Iter &x){
+
+				return (_ptr == x.getPtr());
+			}
 
 			bool	operator!=(const constMapIterator<K, T> &x){
+
+				return (!(*this == x));
+			}
+			template<typename Iter>
+			bool	operator!=(const Iter &x){
 
 				return (!(*this == x));
 			}
@@ -219,20 +261,40 @@ namespace ft{
 
 				return (_ptr > x._ptr);
 			}
+			template<typename Iter>
+			bool	operator>(const Iter &x){
+
+				return (_ptr > x.getPtr());
+			}
 
 			bool	operator<(const constMapIterator<K, T> &x){
 
 				return (_ptr < x._ptr);
+			}
+			template<typename Iter>
+			bool	operator<(const Iter &x){
+
+				return (_ptr < x.getPtr());
 			}
 
 			bool	operator>=(const constMapIterator<K, T> &x){
 
 				return (_ptr >= x._ptr);
 			}
+			template<typename Iter>
+			bool	operator>=(const Iter &x){
+
+				return (_ptr >= x.getPtr());
+			}
 
 			bool	operator<=(const constMapIterator<K, T> &x){
 
 				return (_ptr <= x._ptr);
+			}
+			template<typename Iter>
+			bool	operator<=(const Iter &x){
+
+				return (_ptr <= x.getPtr());
 			}
 
 			constMapIterator	&operator++(){
@@ -330,29 +392,24 @@ namespace ft{
 
 				(*this) = cp;
 			}
-			reverseMapIterator(const mapIterator<K, T> &cp) {
+			template<typename Iter>
+			reverseMapIterator(const Iter &cp){
 
-				(*this) = cp;
+				(*this = cp);
 			}
-			reverseMapIterator(const constMapIterator<K, T> &cp) {
-
-				(*this) = cp;
-			}
+			
 			reverseMapIterator	&operator=(const reverseMapIterator &x){
 
 				this->_ptr = x._ptr;
 				return (*this);
 			}
-			reverseMapIterator	&operator=(const mapIterator<K, T> &x){
+			template<typename Iter>
+			reverseMapIterator	&operator=(const Iter &x){
 
 				this->_ptr = x.getPtr();
 				return (*this);
 			}
-			reverseMapIterator	&operator=(const constMapIterator<K, T> &x){
 
-				this->_ptr = x.getPtr();
-				return (*this);
-			}
 			pointer	node()const{
 
 				return (_ptr);
@@ -372,8 +429,18 @@ namespace ft{
 
 				return (_ptr == x._ptr);
 			}
+			template<typename Iter>
+			bool	operator==(const Iter &x){
+
+				return (_ptr == x.getPtr());
+			}
 
 			bool	operator!=(const reverseMapIterator<K, T> &x){
+
+				return (!(*this == x));
+			}
+			template<typename Iter>
+			bool	operator!=(const Iter &x){
 
 				return (!(*this == x));
 			}
@@ -382,20 +449,40 @@ namespace ft{
 
 				return (_ptr > x._ptr);
 			}
+			template<typename Iter>
+			bool	operator>(const Iter &x){
+
+				return (_ptr > x.getPtr());
+			}
 
 			bool	operator<(const reverseMapIterator<K, T> &x){
 
 				return (_ptr < x._ptr);
+			}
+			template<typename Iter>
+			bool	operator<(const Iter &x){
+
+				return (_ptr < x.getPtr());
 			}
 
 			bool	operator>=(const reverseMapIterator<K, T> &x){
 
 				return (_ptr >= x._ptr);
 			}
+			template<typename Iter>
+			bool	operator>=(const Iter &x){
+
+				return (_ptr >= x.getPtr());
+			}
 
 			bool	operator<=(const reverseMapIterator<K, T> &x){
 
 				return (_ptr <= x._ptr);
+			}
+			template<typename Iter>
+			bool	operator<=(const Iter &x){
+
+				return (_ptr <= x.getPtr());
 			}
 
 			reverseMapIterator	&operator++(){
@@ -493,39 +580,24 @@ namespace ft{
 
 				(*this) = cp;
 			}
-			constReverseMapIterator(const reverseMapIterator<K, T> &cp) {
+			template<typename Iter>
+			constReverseMapIterator(const Iter &cp){
 
-				(*this) = cp;
+				(*this = cp);
 			}
-			
-			constReverseMapIterator(const mapIterator<K, T> &cp) {
 
-				(*this) = cp;
-			}
-			constReverseMapIterator(const constMapIterator<K, T> &cp) {
-
-				(*this) = cp;
-			}
 			constReverseMapIterator	&operator=(const constReverseMapIterator &x){
 
 				this->_ptr = x._ptr;
 				return (*this);
 			}
-			constReverseMapIterator	&operator=(const reverseMapIterator<K, T> &x){
-
-				this->_ptr = x.getPtr();
-				return (*this);
-			}			
-			constReverseMapIterator	&operator=(const mapIterator<K, T> &x){
+			template<typename Iter>
+			constReverseMapIterator	&operator=(const Iter &x){
 
 				this->_ptr = x.getPtr();
 				return (*this);
 			}
-			constReverseMapIterator	&operator=(const constMapIterator<K, T> &x){
-
-				this->_ptr = x.getPtr();
-				return (*this);
-			}
+			
 			
 			pointer	node()const{
 
@@ -546,8 +618,18 @@ namespace ft{
 
 				return (_ptr == x._ptr);
 			}
+			template<typename Iter>
+			bool	operator==(const Iter &x){
+
+				return (_ptr == x.getPtr());
+			}
 
 			bool	operator!=(const constReverseMapIterator<K, T> &x){
+
+				return (!(*this == x));
+			}
+			template<typename Iter>
+			bool	operator!=(const Iter &x){
 
 				return (!(*this == x));
 			}
@@ -556,20 +638,40 @@ namespace ft{
 
 				return (_ptr > x._ptr);
 			}
+			template<typename Iter>
+			bool	operator>(const Iter &x){
+
+				return (_ptr > x.getPtr());
+			}
 
 			bool	operator<(const constReverseMapIterator<K, T> &x){
 
 				return (_ptr < x._ptr);
+			}
+			template<typename Iter>
+			bool	operator<(const Iter &x){
+
+				return (_ptr < x.getPtr());
 			}
 
 			bool	operator>=(const constReverseMapIterator<K, T> &x){
 
 				return (_ptr >= x._ptr);
 			}
+			template<typename Iter>
+			bool	operator>=(const Iter &x){
+
+				return (_ptr >= x.getPtr());
+			}
 
 			bool	operator<=(const constReverseMapIterator<K, T> &x){
 
 				return (_ptr <= x._ptr);
+			}
+			template<typename Iter>
+			bool	operator<=(const Iter &x){
+
+				return (_ptr <= x.getPtr());
 			}
 
 			constReverseMapIterator	&operator++(){
@@ -650,42 +752,6 @@ namespace ft{
 				return (next);
 			}
 	};
-
-	// template<typename Iter1, typename Iter2>
-	// bool	operator==(const Iter1 &x, const Iter2 &y){
-
-	// 	return (x.getPtr() == y.getPtr());
-	// }
-	
-	// template<typename Iter1, typename Iter2>	
-	// bool	operator!=(const Iter1 &x, const Iter2 &y){
-
-	// 	return (!(x == y));
-	// }
-	
-	// template<typename Iter1, typename Iter2>	
-	// bool	operator<(const Iter1 &x, const Iter2 &y){
-
-	// 	return (x.getPtr() < y.getPtr());
-	// }
-	
-	// template<typename Iter1, typename Iter2>	
-	// bool	operator<=(const Iter1 &x, const Iter2 &y){
-
-	// 	return (x.getPtr() <= y.getPtr());
-	// }
-	
-	// template<typename Iter1, typename Iter2>	
-	// bool	operator>(const Iter1 &x, const Iter2 &y){
-
-	// 	return (x.getPtr() > y.getPtr());
-	// }
-	
-	// template<typename Iter1, typename Iter2>	
-	// bool	operator>=(const Iter1 &x, const Iter2 &y){
-
-	// 	return (x.getPtr() >= y.getPtr());
-	// }
 }
 
 #endif
