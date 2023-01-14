@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 15:01:03 by tbrebion          #+#    #+#             */
-/*   Updated: 2023/01/14 21:53:34 by tbrebion         ###   ########.fr       */
+/*   Updated: 2023/01/14 22:29:37 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include <list>
 #include "utils/pair.hpp"
 
-#define NAMESPACE std
+#define NAMESPACE ft
 
 using namespace NAMESPACE;
 
@@ -34,7 +34,6 @@ int main()
 	pair<int, std::string>			my_pair(8, "salut");
 	map<int, std::string>			test;
 	map<int, std::string>			test2;
-	map<int, std::string>::iterator	it;
 
 	test.insert(my_pair);
 	test.insert(pair<int, std::string>(-4, "bar"));
@@ -45,14 +44,16 @@ int main()
 	test.insert(pair<int, std::string>(1, "truc"));
 	test.insert(test.end(), pair<int, std::string>(12, "NEWWWWWWWWWWWWWWW"));
 	test2.insert(test.begin(), test.end());
-	it = test.begin();
+	
+	map<int, std::string>::const_iterator	itb = test.begin();
+	map<int, std::string>::const_iterator	ite = test.end();
 	
 	std::cout << '\n';
 	
-	while (it != test.end())
+	while (itb != ite)
 	{
-		std::cout << it->first << ", " << it->second << '\n';
-		it++;
+		std::cout << itb->first << ", " << itb->second << '\n';
+		itb++;
 	}
 	std::cout << "End of display loop\n";
 	
