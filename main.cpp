@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 15:01:03 by tbrebion          #+#    #+#             */
-/*   Updated: 2023/01/14 22:29:37 by tbrebion         ###   ########.fr       */
+/*   Updated: 2023/01/16 17:53:24 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,43 +22,213 @@
 
 using namespace NAMESPACE;
 
-template <class Key, class T>
-void	print(map<Key, T>& lst)
+#define T1 int
+#define T2 std::string
+typedef map<T1, T2>::value_type T3;
+typedef map<T1, T2>::iterator iterator;
+
+static int iter = 0;
+
+template <typename T>
+std::string	printPair(const T &iterator, bool nl = true, std::ostream &o = std::cout)
 {
-	for (typename map<Key, T>::iterator it = lst.begin(); it != lst.end(); it++)
-		std::cout << it->first << " => " << it->second << '\n';
+	o << "key: " << iterator->first << " | value: " << iterator->second;
+	if (nl)
+		o << std::endl;
+	return ("");
 }
 
-int main()
+template <typename T_MAP>
+void	printSize(T_MAP const &mp, bool print_content = 1)
 {
-	pair<int, std::string>			my_pair(8, "salut");
-	map<int, std::string>			test;
-	map<int, std::string>			test2;
-
-	test.insert(my_pair);
-	test.insert(pair<int, std::string>(-4, "bar"));
-	test.insert(pair<int, std::string>(0, "MYTEST"));
-	test.insert(pair<int, std::string>(2, "machin"));
-	test.insert(pair<int, std::string>(3, "foo"));
-	test.insert(pair<int, std::string>(746, "Marcel"));
-	test.insert(pair<int, std::string>(1, "truc"));
-	test.insert(test.end(), pair<int, std::string>(12, "NEWWWWWWWWWWWWWWW"));
-	test2.insert(test.begin(), test.end());
-	
-	map<int, std::string>::const_iterator	itb = test.begin();
-	map<int, std::string>::const_iterator	ite = test.end();
-	
-	std::cout << '\n';
-	
-	while (itb != ite)
+	std::cout << "size: " << mp.size() << std::endl;
+	std::cout << "max_size: " << mp.max_size() << std::endl;
+	if (print_content)
 	{
-		std::cout << itb->first << ", " << itb->second << '\n';
-		itb++;
+		typename T_MAP::const_iterator it = mp.begin(), ite = mp.end();
+		std::cout << std::endl << "Content is:" << std::endl;
+		for (; it != ite; ++it)
+			std::cout << "- " << printPair(it, false) << std::endl;
 	}
-	std::cout << "End of display loop\n";
-	
+	std::cout << "###############################################" << std::endl;
+}
+
+
+// template <typename MAP, typename U>
+// void	ft_insert(MAP &mp, U param)
+// {
+// 	pairiterator, bool> tmp;
+
+// 	std::cout << "\t-- [" << iter++ << "] --" << std::endl;
+// 	tmp = mp.insert(param);
+// 	std::cout << "insert return: " << printPair(tmp.first);
+// 	std::cout << "Created new node: " << tmp.second << std::endl;
+// 	printSize(mp);
+// }
+
+template <typename MAP, typename U, typename V>
+void	ft_insert(MAP &mp, U param, V param2)
+{
+	typename MAP::iterator tmp;
+
+	std::cout << "\t-- [" << iter++ << "] --" << std::endl;
+	tmp = mp.insert(param, param2);
+	std::cout << "insert return: " << printPair(tmp);
+	printSize(mp);
+}
+
+int		main(void)
+{
+	map<T1, T2> mp, mp2;
+
+	// ft_insert(mp, T3(42, "lol"));
+	// ft_insert(mp, T3(42, "mdr"));
+
+	// ft_insert(mp, T3(50, "mdr"));
+	// ft_insert(mp, T3(35, "funny"));
+
+	// ft_insert(mp, T3(45, "bunny"));
+	// ft_insert(mp, T3(21, "fizz"));
+	// ft_insert(mp, T3(38, "buzz"));
+	mp.insert(pair<int, std::string>(42, "lol"));
+	mp.insert(pair<int, std::string>(42, "mdr"));
+	mp.insert(pair<int, std::string>(50, "mdr"));
+	mp.insert(pair<int, std::string>(35, "funny"));
+	mp.insert(pair<int, std::string>(45, "bunny"));
+	mp.insert(pair<int, std::string>(21, "fizz"));
+	mp.insert(pair<int, std::string>(38, "buzz"));
+
+	ft_insert(mp, mp.begin(), T3(55, "fuzzy"));
+
+	ft_insert(mp2, mp2.begin(), T3(1337, "beauty"));
+	ft_insert(mp2, mp2.end(), T3(1000, "Hello"));
+	ft_insert(mp2, mp2.end(), T3(1500, "World"));
+
 	return (0);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// #define T1 char
+// #define T2 int
+
+// template <class MAP>
+// void	cmp(const MAP &lhs, const MAP &rhs)
+// {
+// 	static int i = 0;
+
+// 	std::cout << "############### [" << i++ << "] ###############"  << std::endl;
+// 	std::cout << "eq: " << (lhs == rhs) << " | ne: " << (lhs != rhs) << std::endl;
+// 	std::cout << "lt: " << (lhs <  rhs) << " | le: " << (lhs <= rhs) << std::endl;
+// 	std::cout << "gt: " << (lhs >  rhs) << " | ge: " << (lhs >= rhs) << std::endl;
+// }
+
+// int		main(void)
+// {
+// 	map<T1, T2> mp1;
+// 	map<T1, T2> mp2;
+
+// 	mp1['a'] = 2;
+// 	mp1['b'] = 3; 
+// 	mp1['c'] = 4; 
+// 	mp1['d'] = 5;
+	
+// 	mp2['a'] = 2; 
+// 	mp2['b'] = 3; 
+// 	mp2['c'] = 4; 
+// 	mp2['d'] = 5;
+
+// 	mp2['e'] = 6; 
+// 	mp2['f'] = 7; 
+// 	mp2['h'] = 8; 
+// 	mp2['h'] = 9;
+
+// 	(++(++mp1.begin()))->second = 42;
+
+// 	cmp(mp2, mp1); // 5
+
+// 	swap(mp1, mp2);
+
+// 	cmp(mp1, mp2); // 6
+// 	cmp(mp2, mp1); // 7
+
+// 	return (0);
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// struct ft_more {
+// 	bool	operator()(const int &first, const int &second) const {
+// 		return (first > second);
+// 	}
+// };
+
+
+
+// int main()
+// {
+// 	pair<int, std::string>			my_pair(8, "salut");
+// 	map<int, std::string, ft_more>			test;
+
+// 	test.insert(my_pair);
+// 	test.insert(pair<int, std::string>(-4, "bar"));
+// 	test.insert(pair<int, std::string>(0, "MYTEST"));
+// 	test.insert(pair<int, std::string>(2, "machin"));
+// 	test.insert(pair<int, std::string>(3, "foo"));
+// 	test.insert(pair<int, std::string>(746, "Marcel"));
+// 	test.insert(pair<int, std::string>(1, "truc"));
+// 	test.insert(test.end(), pair<int, std::string>(12, "NEWWWWWWWWWWWWWWW"));
+	
+// 	printSize(test);
+	
+// 	return (0);
+// }
+// template <class Key, class T>
+// void	print(map<Key, T>& lst)
+// {
+// 	for (typename map<Key, T>::iterator it = lst.begin(); it != lst.end(); it++)
+// 		std::cout << it->first << " => " << it->second << '\n';
+// }
 
 // int main ()
 // {

@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 14:30:23 by tbrebion          #+#    #+#             */
-/*   Updated: 2023/01/14 21:38:40 by tbrebion         ###   ########.fr       */
+/*   Updated: 2023/01/16 18:03:29 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,8 @@ namespace ft{
 			typedef constMapIterator<key_type, mapped_type>	const_iterator;
 			typedef constReverseMapIterator<key_type, mapped_type>	const_reverse_iterator;
 			
-			class value_compare{
+			class value_compare : public std::binary_function<value_type, value_type, bool>{
 
-				friend class map;
 				
 				protected:
 					Compare	comp;
@@ -55,6 +54,15 @@ namespace ft{
 
 						return(comp(x.first, y.first));
 					}
+					bool	operator()(const key_type &x, const value_type &y)const{
+
+						return(comp(x, y.first));
+					}
+					bool	operator()(const value_type &x, const key_type &y)const{
+
+						return(comp(x.first, y));
+					}
+					friend class map;
 			};
 		private:
 			allocator_type	_allocator;
@@ -64,13 +72,13 @@ namespace ft{
 			
 			node	_new_node(key_type key, mapped_type value, node parent, bool end = false){
 				
-				node el = new BNode<key_type, mapped_type>();
-				el->pair = ft::make_pair(key, value);
-				el->right = 0;
-				el->left = 0;
-				el->parent = parent;
-				el->end = end;
-				return (el);
+				node n = new BNode<key_type, mapped_type>();
+				n->pair = ft::make_pair(key, value);
+				n->right = 0;
+				n->left = 0;
+				n->parent = parent;
+				n->end = end;
+				return (n);
 			}
 			
 			void	_free_tree(node n){
@@ -93,7 +101,7 @@ namespace ft{
 					}
 					return (_insert_node(n->left, key, value));
 				}
-				if (key < n->pair.first && !end){
+				if (_comp(key, n->pair.first) && !end){
 					
 					if (!n->left){
 

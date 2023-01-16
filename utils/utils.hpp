@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 13:49:27 by tbrebion          #+#    #+#             */
-/*   Updated: 2023/01/12 14:42:38 by tbrebion         ###   ########.fr       */
+/*   Updated: 2023/01/16 17:28:15 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,49 +67,3 @@ namespace ft{
 }
 
 #endif
-
-	// template<typename T>
-	// class avlNode{
-
-	// 	public:
-	// 		typedef T	value_type;
-	// 		int			bf;
-	// 		value_type	*data;
-	// 		avlNode<T>	*left;
-	// 		avlNode<T>	*right;
-	// 		avlNode<T>	*parent;
-	// 		int			height;
-			
-	// 		avlNode() : data(NULL), left(NULL), right(NULL), parent(NULL), height(0) 
-	// 		{}
-	// 		avlNode(value_type val) : data(val), left(NULL), right(NULL), parent(NULL), height(0) 
-	// 		{}
-	// 		avlNode(const avlNode &nd) : data(nd.data), left(nd.left), right(nd.right), parent(nd.parent)/* , height(nd.height), bf(nd.bf) */ 
-	// 		{}
-	// 		~avlNode() {}
-	// 		avlNode	&operator=(const avlNode &cp){
-
-	// 			this->bf = cp.bf;
-	// 			this->data = cp.data;
-	// 			this->left = cp.left;
-	// 			this->right = cp.right;
-	// 			this->parent = cp.parent;
-	// 			this->height = cp.height;
-				
-	// 			return (*this);
-	// 		}
-	// };
-	
-	// template<typename T>
-	// bool	operator==(const avlNode<T> &x, const avlNode<T> &y){
-
-	// 	if (x.data == NULL && y.data == NULL)
-	// 		return (true);
-	// 	return (x.data == y.data);
-	// }
-	
-	// template<typename T>
-	// bool	operator!=(const avlNode<T> &x, const avlNode<T> &y){
-		
-	// 	return (!(x.data == y.data));
-	// }
