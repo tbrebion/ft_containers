@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 15:01:03 by tbrebion          #+#    #+#             */
-/*   Updated: 2023/01/16 19:50:19 by tbrebion         ###   ########.fr       */
+/*   Updated: 2023/01/16 21:26:20 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,6 @@ void	printSize(T_MAP const &mp, bool print_content = 1)
 	std::cout << "###############################################" << std::endl;
 }
 
-// template <typename MAP, typename U, typename V>
-// void	ft_insert(MAP &mp, U param, V param2)
-// {
-// 	typename MAP::iterator tmp;
-
-// 	std::cout << "\t-- [" << iter++ << "] --" << std::endl;
-// 	tmp = mp.insert(param, param2);
-// 	std::cout << "insert return: " << printPair(tmp);
-// 	printSize(mp);
-// }
-
 template <typename Ty1, typename Ty2>
 void	printReverse(map<Ty1, Ty2> &mp)
 {
@@ -80,57 +69,164 @@ T	dec(T it, int n)
 	return (it);
 }
 
+static int iter = 0;
+
+// template <typename MAP, typename U>
+// void	ft_insert(MAP &mp, U param)
+// {
+// 	pair<typename MAP::iterator, bool> tmp;
+
+// 	std::cout << "\t-- [" << iter++ << "] --" << std::endl;
+// 	tmp = mp.insert(param);
+// 	std::cout << "insert return: " << printPair(tmp.first);
+// 	std::cout << "Created new node: " << tmp.second << std::endl;
+// 	printSize(mp);
+// }
+
+template <typename MAP, typename U, typename V>
+void	ft_insert(MAP &mp, U param, V param2)
+{
+	typename MAP::iterator tmp;
+
+	std::cout << "\t-- [" << iter++ << "] --" << std::endl;
+	tmp = mp.insert(param, param2);
+	std::cout << "insert return: " << printPair(tmp);
+	printSize(mp);
+}
 
 //////////////////////////////////////////////////////////////////////////////////////
 //									MAIN											//
 //////////////////////////////////////////////////////////////////////////////////////
 
 
-#define T1 char
-#define T2 int
 
-template <class MAP>
-void	cmp(const MAP &lhs, const MAP &rhs)
-{
-	static int i = 0;
 
-	std::cout << "############### [" << i++ << "] ###############"  << std::endl;
-	std::cout << "eq: " << (lhs == rhs) << " | ne: " << (lhs != rhs) << std::endl;
-	std::cout << "lt: " << (lhs <  rhs) << " | le: " << (lhs <= rhs) << std::endl;
-	std::cout << "gt: " << (lhs >  rhs) << " | ge: " << (lhs >= rhs) << std::endl;
-}
+#define T1 int
+#define T2 std::string
+typedef map<T1, T2>::value_type T3;
+typedef map<T1, T2>::iterator iterator;
+
 
 int		main(void)
 {
-	map<T1, T2> mp1;
-	map<T1, T2> mp2;
+	map<T1, T2> mp, mp2;
 
-	mp1['a'] = 2;
-	mp1['b'] = 3; 
-	mp1['c'] = 4; 
-	mp1['d'] = 5;
-	
-	mp2['a'] = 2; 
-	mp2['b'] = 3; 
-	mp2['c'] = 4; 
-	mp2['d'] = 5;
+	// ft_insert(mp, T3(42, "lol"));
+	// ft_insert(mp, T3(42, "mdr"));
 
-	mp2['e'] = 6; 
-	mp2['f'] = 7; 
-	mp2['h'] = 8; 
-	mp2['h'] = 9;
+	// ft_insert(mp, T3(50, "mdr"));
+	// ft_insert(mp, T3(35, "funny"));
 
-	(++(++mp1.begin()))->second = 42;
+	// ft_insert(mp, T3(45, "bunny"));
+	// ft_insert(mp, T3(21, "fizz"));
+	// ft_insert(mp, T3(38, "buzz"));
+	mp.insert(pair<int, std::string>(42, "lol"));
+	mp.insert(pair<int, std::string>(42, "mdr"));
+	mp.insert(pair<int, std::string>(50, "mdr"));
+	mp.insert(pair<int, std::string>(35, "funny"));
+	mp.insert(pair<int, std::string>(45, "bunny"));
+	mp.insert(pair<int, std::string>(21, "fizz"));
+	// mp.insert(pair<int, std::string>(38, "buzz"));
 
-	cmp(mp2, mp1); // 5
+	ft_insert(mp, mp.begin(), T3(555, "fuzzy"));
 
-	// swap(mp1, mp2);
-
-	// cmp(mp1, mp2); // 6
-	// cmp(mp2, mp1); // 7
+	// ft_insert(mp2, mp2.begin(), T3(1337, "beauty"));
+	// ft_insert(mp2, mp2.end(), T3(1000, "Hello"));
+	// ft_insert(mp2, mp2.end(), T3(1500, "World"));
 
 	return (0);
 }
+
+
+
+
+
+// #define T1 char
+// #define T2 int
+
+// template <class MAP>
+// void	cmp(const MAP &lhs, const MAP &rhs)
+// {
+// 	static int i = 0;
+
+// 	std::cout << "############### [" << i++ << "] ###############"  << std::endl;
+// 	std::cout << "eq: " << (lhs == rhs) << " | ne: " << (lhs != rhs) << std::endl;
+// 	std::cout << "lt: " << (lhs <  rhs) << " | le: " << (lhs <= rhs) << std::endl;
+// 	std::cout << "gt: " << (lhs >  rhs) << " | ge: " << (lhs >= rhs) << std::endl;
+// }
+
+// int		main(void)
+// {
+// 	map<T1, T2> mp1;
+// 	map<T1, T2> mp2;
+
+// 	mp1['a'] = 2; mp1['b'] = 3; mp1['c'] = 4; mp1['d'] = 5;
+// 	mp2['a'] = 2; mp2['b'] = 3; mp2['c'] = 4; mp2['d'] = 5;
+
+// 	cmp(mp1, mp1); // 0
+// 	cmp(mp1, mp2); // 1
+
+// 	mp2['e'] = 6; mp2['f'] = 7; mp2['h'] = 8; mp2['h'] = 9;
+
+// 	cmp(mp1, mp2); // 2
+// 	cmp(mp2, mp1); // 3
+
+// 	(++(++mp1.begin()))->second = 42;
+
+// 	/////////////////////////////////////////////////
+	
+// 	std::cout << "/////////////////////////////////////////" << std::endl;
+	
+// 	for(map<T1, T2>::iterator it1 = mp1.begin(); it1 != mp1.end(); ++it1){
+
+// 		printPair(it1);
+// 	}
+	
+// 	std::cout << "/////////////////////////////////////////" << std::endl;
+	
+// 	for(map<T1, T2>::iterator it2 = mp2.begin(); it2 != mp2.end(); ++it2){
+
+// 		printPair(it2);
+// 	}
+
+// 	std::cout << "/////////////////////////////////////////" << std::endl;
+	
+// 	/////////////////////////////////////////////////
+
+// 	cmp(mp1, mp2); // 4
+// 	cmp(mp2, mp1); // 5
+
+// 	swap(mp1, mp2);
+	
+// 	/////////////////////////////////////////////////
+	
+// 	std::cout << "/////////////////////////////////////////" << std::endl;
+	
+// 	for(map<T1, T2>::iterator it1 = mp1.begin(); it1 != mp1.end(); ++it1){
+
+// 		printPair(it1);
+// 	}
+	
+// 	std::cout << "/////////////////////////////////////////" << std::endl;
+	
+// 	for(map<T1, T2>::iterator it2 = mp2.begin(); it2 != mp2.end(); ++it2){
+
+// 		printPair(it2);
+// 	}
+
+// 	std::cout << "/////////////////////////////////////////" << std::endl;
+	
+// 	/////////////////////////////////////////////////
+
+// 	cmp(mp1, mp2); // 6
+// 	cmp(mp2, mp1); // 7
+
+// 	return (0);
+// }
+
+
+
+
 
 
 // template <typename T>
@@ -206,76 +302,6 @@ int		main(void)
 
 // 	return (0);
 // }
-
-
-
-
-
-
-
-// int		main(void)
-// {
-// 	map<T1, T2> mp, mp2;
-
-// 	// ft_insert(mp, T3(42, "lol"));
-// 	// ft_insert(mp, T3(42, "mdr"));
-
-// 	// ft_insert(mp, T3(50, "mdr"));
-// 	// ft_insert(mp, T3(35, "funny"));
-
-// 	// ft_insert(mp, T3(45, "bunny"));
-// 	// ft_insert(mp, T3(21, "fizz"));
-// 	// ft_insert(mp, T3(38, "buzz"));
-// 	mp.insert(pair<int, std::string>(42, "lol"));
-// 	mp.insert(pair<int, std::string>(42, "mdr"));
-// 	mp.insert(pair<int, std::string>(50, "mdr"));
-// 	mp.insert(pair<int, std::string>(35, "funny"));
-// 	mp.insert(pair<int, std::string>(45, "bunny"));
-// 	mp.insert(pair<int, std::string>(21, "fizz"));
-// 	mp.insert(pair<int, std::string>(38, "buzz"));
-
-// 	ft_insert(mp, mp.begin(), T3(55, "fuzzy"));
-
-// 	ft_insert(mp2, mp2.begin(), T3(1337, "beauty"));
-// 	ft_insert(mp2, mp2.end(), T3(1000, "Hello"));
-// 	ft_insert(mp2, mp2.end(), T3(1500, "World"));
-
-// 	return (0);
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

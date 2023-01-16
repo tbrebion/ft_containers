@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 14:30:23 by tbrebion          #+#    #+#             */
-/*   Updated: 2023/01/16 19:54:06 by tbrebion         ###   ########.fr       */
+/*   Updated: 2023/01/16 21:41:53 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ namespace ft{
 						return (n->right);
 					}
 					else
-						return (_insert_node(n->right, key, value));
+						return (_insert_node(n->right, key, value));						
 				}
 			}
 			
@@ -316,11 +316,29 @@ namespace ft{
 				return (ft::make_pair(iterator(_insert_node(_root->right, value.first, value.second)), true));
 			}
 
+			// iterator	insert(iterator position, const value_type &value){
+
+			// 	iterator tmp;
+			// 	if ((tmp = find(value.first)) != end())
+			// 		return (tmp);
+			// 	++_length;
+			// 	return (iterator(_insert_node(position.node(), value.first, value.second)));
+			// }
 			iterator	insert(iterator position, const value_type &value){
 
 				iterator tmp;
-				if ((tmp = find(value.first)) != end())
+				if ((tmp = find(value.first)) != end()){
+					
 					return (tmp);
+				}
+				////////////////////////////////////////////////////
+
+				// Voila l'idee : incrementer la postion tant que la cle a la position est superieur.
+				
+				// while (_comp(value.first, position.getPtr()->pair))
+					// ++position;
+					
+				////////////////////////////////////////////////////
 				++_length;
 				return (iterator(_insert_node(position.node(), value.first, value.second)));
 			}
@@ -502,32 +520,15 @@ namespace ft{
 	}
 	
 	template<typename Key, typename T, typename Compare, typename Alloc>
-	bool	operator>(const ft::map<Key, T, Compare, Alloc> &x, const ft::map<Key, T, Compare, Alloc> &y){
-
-		if (x.size() > y.size())
-			return (true);		
-		typename ft::map<Key, T, Compare, Alloc>::const_iterator it = x.begin();
-		typename ft::map<Key, T, Compare, Alloc>::const_iterator it2 = y.begin();
-		while (it != x.end() && it2 != y.end()){
-
-			if (*it > *it2)
-				return (true);
-			++it;
-			++it2;
-		}
-		return (false);
-	}
-
-	template<typename Key, typename T, typename Compare, typename Alloc>
 	bool	operator<(const ft::map<Key, T, Compare, Alloc> &x, const ft::map<Key, T, Compare, Alloc> &y){
 
-		return (!(x > y) && !(x == y));
+		return lexicographical_compare(x.begin(), x.end(), y.begin(), y.end());
 	}
 	
 	template<typename Key, typename T, typename Compare, typename Alloc>
-	bool	operator>=(const ft::map<Key, T, Compare, Alloc> &x, const ft::map<Key, T, Compare, Alloc> &y){
+	bool	operator>(const ft::map<Key, T, Compare, Alloc> &x, const ft::map<Key, T, Compare, Alloc> &y){
 
-		return (!(x < y));
+		return (y < x); 
 	}
 	
 	template<typename Key, typename T, typename Compare, typename Alloc>
@@ -535,6 +536,12 @@ namespace ft{
 
 		return (!(x > y));
 	}	
+	
+	template<typename Key, typename T, typename Compare, typename Alloc>
+	bool	operator>=(const ft::map<Key, T, Compare, Alloc> &x, const ft::map<Key, T, Compare, Alloc> &y){
+
+		return (!(x < y));
+	}
 }
 
 #endif
