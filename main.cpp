@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 15:01:03 by tbrebion          #+#    #+#             */
-/*   Updated: 2023/01/16 17:53:24 by tbrebion         ###   ########.fr       */
+/*   Updated: 2023/01/16 19:50:19 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,6 @@
 
 using namespace NAMESPACE;
 
-#define T1 int
-#define T2 std::string
-typedef map<T1, T2>::value_type T3;
-typedef map<T1, T2>::iterator iterator;
-
-static int iter = 0;
 
 template <typename T>
 std::string	printPair(const T &iterator, bool nl = true, std::ostream &o = std::cout)
@@ -53,127 +47,224 @@ void	printSize(T_MAP const &mp, bool print_content = 1)
 	std::cout << "###############################################" << std::endl;
 }
 
-
-// template <typename MAP, typename U>
-// void	ft_insert(MAP &mp, U param)
+// template <typename MAP, typename U, typename V>
+// void	ft_insert(MAP &mp, U param, V param2)
 // {
-// 	pairiterator, bool> tmp;
+// 	typename MAP::iterator tmp;
 
 // 	std::cout << "\t-- [" << iter++ << "] --" << std::endl;
-// 	tmp = mp.insert(param);
-// 	std::cout << "insert return: " << printPair(tmp.first);
-// 	std::cout << "Created new node: " << tmp.second << std::endl;
+// 	tmp = mp.insert(param, param2);
+// 	std::cout << "insert return: " << printPair(tmp);
 // 	printSize(mp);
 // }
 
-template <typename MAP, typename U, typename V>
-void	ft_insert(MAP &mp, U param, V param2)
+template <typename Ty1, typename Ty2>
+void	printReverse(map<Ty1, Ty2> &mp)
 {
-	typename MAP::iterator tmp;
+	typename map<Ty1, Ty2>::iterator it = mp.end(), ite = mp.begin();
 
-	std::cout << "\t-- [" << iter++ << "] --" << std::endl;
-	tmp = mp.insert(param, param2);
-	std::cout << "insert return: " << printPair(tmp);
-	printSize(mp);
+	std::cout << "printReverse:" << std::endl;
+	while (it != ite) {
+		it--;
+		std::cout << "-> " << printPair(it, false) << std::endl;
+	}
+	std::cout << "_______________________________________________" << std::endl;
+}
+
+
+template <typename T>
+T	dec(T it, int n)
+{
+	while (n-- > 0)
+		--it;
+	return (it);
+}
+
+
+//////////////////////////////////////////////////////////////////////////////////////
+//									MAIN											//
+//////////////////////////////////////////////////////////////////////////////////////
+
+
+#define T1 char
+#define T2 int
+
+template <class MAP>
+void	cmp(const MAP &lhs, const MAP &rhs)
+{
+	static int i = 0;
+
+	std::cout << "############### [" << i++ << "] ###############"  << std::endl;
+	std::cout << "eq: " << (lhs == rhs) << " | ne: " << (lhs != rhs) << std::endl;
+	std::cout << "lt: " << (lhs <  rhs) << " | le: " << (lhs <= rhs) << std::endl;
+	std::cout << "gt: " << (lhs >  rhs) << " | ge: " << (lhs >= rhs) << std::endl;
 }
 
 int		main(void)
 {
-	map<T1, T2> mp, mp2;
+	map<T1, T2> mp1;
+	map<T1, T2> mp2;
 
-	// ft_insert(mp, T3(42, "lol"));
-	// ft_insert(mp, T3(42, "mdr"));
+	mp1['a'] = 2;
+	mp1['b'] = 3; 
+	mp1['c'] = 4; 
+	mp1['d'] = 5;
+	
+	mp2['a'] = 2; 
+	mp2['b'] = 3; 
+	mp2['c'] = 4; 
+	mp2['d'] = 5;
 
-	// ft_insert(mp, T3(50, "mdr"));
-	// ft_insert(mp, T3(35, "funny"));
+	mp2['e'] = 6; 
+	mp2['f'] = 7; 
+	mp2['h'] = 8; 
+	mp2['h'] = 9;
 
-	// ft_insert(mp, T3(45, "bunny"));
-	// ft_insert(mp, T3(21, "fizz"));
-	// ft_insert(mp, T3(38, "buzz"));
-	mp.insert(pair<int, std::string>(42, "lol"));
-	mp.insert(pair<int, std::string>(42, "mdr"));
-	mp.insert(pair<int, std::string>(50, "mdr"));
-	mp.insert(pair<int, std::string>(35, "funny"));
-	mp.insert(pair<int, std::string>(45, "bunny"));
-	mp.insert(pair<int, std::string>(21, "fizz"));
-	mp.insert(pair<int, std::string>(38, "buzz"));
+	(++(++mp1.begin()))->second = 42;
 
-	ft_insert(mp, mp.begin(), T3(55, "fuzzy"));
+	cmp(mp2, mp1); // 5
 
-	ft_insert(mp2, mp2.begin(), T3(1337, "beauty"));
-	ft_insert(mp2, mp2.end(), T3(1000, "Hello"));
-	ft_insert(mp2, mp2.end(), T3(1500, "World"));
+	// swap(mp1, mp2);
+
+	// cmp(mp1, mp2); // 6
+	// cmp(mp2, mp1); // 7
 
 	return (0);
 }
 
 
+// template <typename T>
+// class foo {
+// 	public:
+// 		typedef T	value_type;
 
+// 		foo(void) : value(), _verbose(false) { };
+// 		foo(value_type src, const bool verbose = false) : value(src), _verbose(verbose) { };
+// 		foo(foo const &src, const bool verbose = false) : value(src.value), _verbose(verbose) { };
+// 		~foo(void) { if (this->_verbose) std::cout << "~foo::foo()" << std::endl; };
+// 		void m(void) { std::cout << "foo::m called [" << this->value << "]" << std::endl; };
+// 		void m(void) const { std::cout << "foo::m const called [" << this->value << "]" << std::endl; };
+// 		foo &operator=(value_type src) { this->value = src; return *this; };
+// 		foo &operator=(foo const &src) {
+// 			if (this->_verbose || src._verbose)
+// 				std::cout << "foo::operator=(foo) CALLED" << std::endl;
+// 			this->value = src.value;
+// 			return *this;
+// 		};
+// 		value_type	getValue(void) const { return this->value; };
+// 		void		switchVerbose(void) { this->_verbose = !(this->_verbose); };
 
+// 		operator value_type(void) const {
+// 			return value_type(this->value);
+// 		}
+// 	private:
+// 		value_type	value;
+// 		bool		_verbose;
+// };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// #define T1 char
-// #define T2 int
-
-// template <class MAP>
-// void	cmp(const MAP &lhs, const MAP &rhs)
-// {
-// 	static int i = 0;
-
-// 	std::cout << "############### [" << i++ << "] ###############"  << std::endl;
-// 	std::cout << "eq: " << (lhs == rhs) << " | ne: " << (lhs != rhs) << std::endl;
-// 	std::cout << "lt: " << (lhs <  rhs) << " | le: " << (lhs <= rhs) << std::endl;
-// 	std::cout << "gt: " << (lhs >  rhs) << " | ge: " << (lhs >= rhs) << std::endl;
-// }
+// #define T1 float
+// #define T2 foo<int>
+// typedef pair<const T1, T2> T3;
 
 // int		main(void)
 // {
-// 	map<T1, T2> mp1;
-// 	map<T1, T2> mp2;
+// 	std::list<T3> lst;
+// 	unsigned int lst_size = 5;
+// 	for (unsigned int i = 0; i < lst_size; ++i)
+// 		lst.push_back(T3(2.5 - i, (i + 1) * 7));
 
-// 	mp1['a'] = 2;
-// 	mp1['b'] = 3; 
-// 	mp1['c'] = 4; 
-// 	mp1['d'] = 5;
-	
-// 	mp2['a'] = 2; 
-// 	mp2['b'] = 3; 
-// 	mp2['c'] = 4; 
-// 	mp2['d'] = 5;
+// 	map<T1, T2> mp(lst.begin(), lst.end());
+// 	map<T1, T2>::reverse_iterator it(mp.rbegin());
+// 	map<T1, T2>::const_reverse_iterator ite(mp.rbegin());
+// 	printSize(mp);
 
-// 	mp2['e'] = 6; 
-// 	mp2['f'] = 7; 
-// 	mp2['h'] = 8; 
-// 	mp2['h'] = 9;
+// 	printPair(++ite);
+// 	printPair(ite++);
+// 	printPair(ite++);
+// 	printPair(++ite);
 
-// 	(++(++mp1.begin()))->second = 42;
+// 	it->second.m();
+// 	ite->second.m();
 
-// 	cmp(mp2, mp1); // 5
+// 	printPair(++it);
+// 	printPair(it++);
+// 	printPair(it++);
+// 	printPair(++it);
 
-// 	swap(mp1, mp2);
+// 	printPair(--ite);
+// 	printPair(ite--);
+// 	printPair(--ite);
+// 	printPair(ite--);
 
-// 	cmp(mp1, mp2); // 6
-// 	cmp(mp2, mp1); // 7
+// 	(*it).second.m();
+// 	(*ite).second.m();
+
+// 	printPair(--it);
+// 	printPair(it--);
+// 	printPair(it--);
+// 	printPair(--it);
 
 // 	return (0);
 // }
+
+
+
+
+
+
+
+// int		main(void)
+// {
+// 	map<T1, T2> mp, mp2;
+
+// 	// ft_insert(mp, T3(42, "lol"));
+// 	// ft_insert(mp, T3(42, "mdr"));
+
+// 	// ft_insert(mp, T3(50, "mdr"));
+// 	// ft_insert(mp, T3(35, "funny"));
+
+// 	// ft_insert(mp, T3(45, "bunny"));
+// 	// ft_insert(mp, T3(21, "fizz"));
+// 	// ft_insert(mp, T3(38, "buzz"));
+// 	mp.insert(pair<int, std::string>(42, "lol"));
+// 	mp.insert(pair<int, std::string>(42, "mdr"));
+// 	mp.insert(pair<int, std::string>(50, "mdr"));
+// 	mp.insert(pair<int, std::string>(35, "funny"));
+// 	mp.insert(pair<int, std::string>(45, "bunny"));
+// 	mp.insert(pair<int, std::string>(21, "fizz"));
+// 	mp.insert(pair<int, std::string>(38, "buzz"));
+
+// 	ft_insert(mp, mp.begin(), T3(55, "fuzzy"));
+
+// 	ft_insert(mp2, mp2.begin(), T3(1337, "beauty"));
+// 	ft_insert(mp2, mp2.end(), T3(1000, "Hello"));
+// 	ft_insert(mp2, mp2.end(), T3(1500, "World"));
+
+// 	return (0);
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

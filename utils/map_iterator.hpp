@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:43:57 by tbrebion          #+#    #+#             */
-/*   Updated: 2023/01/14 20:09:02 by tbrebion         ###   ########.fr       */
+/*   Updated: 2023/01/16 19:44:51 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,7 @@ namespace ft{
 			
 			const mapIterator	base()const{
 
-				return (mapIterator(_ptr));
+				return (mapIterator(_ptr)->operator()++);
 			}
 
 		protected:
@@ -196,8 +196,8 @@ namespace ft{
 	class constMapIterator{
 
 		public:
-			typedef ft::pair<K, T> value_type;
-			typedef ft::pair<K, T> &reference;
+			typedef const ft::pair<K, T> value_type;
+			typedef const ft::pair<K, T> &reference;
 			typedef BNode<K, T> *pointer;
 
 			constMapIterator() : _ptr(0) {}
@@ -330,7 +330,7 @@ namespace ft{
 
 			const constMapIterator	base()const{
 
-				return (constMapIterator(_ptr));
+				return (constMapIterator(_ptr)->operator()++);
 			}
 
 		protected:
@@ -518,7 +518,7 @@ namespace ft{
 			
 			const reverseMapIterator	base()const{
 
-				return (reverseMapIterator(_ptr));
+				return (reverseMapIterator(_ptr)->operator()++);
 			}
 
 		protected:
@@ -570,8 +570,8 @@ namespace ft{
 	class constReverseMapIterator{
 
 		public:
-			typedef ft::pair<K, T> value_type;
-			typedef ft::pair<K, T> &reference;
+			typedef const ft::pair<K, T> value_type;
+			typedef const ft::pair<K, T> &reference;
 			typedef BNode<K, T> *pointer;
 
 			constReverseMapIterator() : _ptr(0) {}
@@ -707,7 +707,7 @@ namespace ft{
 
 			const constReverseMapIterator	base()const{
 
-				return (constReverseMapIterator(_ptr));
+				return (constReverseMapIterator(_ptr)->operator()++);
 			}
 
 		protected:
