@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 15:01:03 by tbrebion          #+#    #+#             */
-/*   Updated: 2023/01/17 16:19:29 by tbrebion         ###   ########.fr       */
+/*   Updated: 2023/01/17 18:13:00 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,13 +121,6 @@ void	print(map<Key, T>& lst)
 // #include <cstdio>
 // #include <iomanip>
 
-// template <class Key, class T>
-// void	print(map<Key, T>& lst)
-// {
-// 	std::cout << "printing a map : \n";
-// 	for (typename map<Key, T>::iterator it = lst.begin(); it != lst.end(); it++)
-// 		std::cout << it->first << " => " << it->second << '\n';
-// }
 
 // int main()
 // {
@@ -517,12 +510,6 @@ void	print(map<Key, T>& lst)
 
 
 
-// template <class Key, class T>
-// void	print(map<Key, T>& lst)
-// {
-// 	for (typename map<Key, T>::iterator it = lst.begin(); it != lst.end(); it++)
-// 		std::cout << it->first << " => " << it->second << '\n';
-// }
 
 // int main ()
 // {
