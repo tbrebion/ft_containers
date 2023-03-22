@@ -6,7 +6,7 @@
 /*   By: tbrebion <tbrebion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 11:54:23 by tbrebion          #+#    #+#             */
-/*   Updated: 2023/01/17 15:54:38 by tbrebion         ###   ########.fr       */
+/*   Updated: 2023/03/22 21:02:13 by tbrebion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,12 +212,8 @@ namespace ft{
 
 			void	reserve(size_type n){
 
-				if (n > max_size()){
-
+				if (n > max_size())
 						throw reserveException();
-						// std::cout << "length error" << std::endl;
-						// return;
-				}
 				if (n > capacity()){
 
 					pointer x = vector_allocator.allocate(n);
